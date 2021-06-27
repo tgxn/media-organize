@@ -1,10 +1,14 @@
 {
-  "name": "organize",
+  "name": "media-organizer",
+  "author": "tgxn <me@tgxn.net>",
   "version": "1.0.0",
-  "description": "",
   "main": "run.js",
   "scripts": {
-    "start": "node run.js"
+    "start": "node run.js",
+    "test": "jest"
+  },
+  "bin": {
+    "mediaScan": "cli.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -12,5 +16,8 @@
     "episode-parser": "^2.0.2",
     "mime": "^2.5.2",
     "parse-torrent-name": "^0.5.4"
+  },
+  "devDependencies": {
+    "jest": "^27.0.5"
   }
 }
