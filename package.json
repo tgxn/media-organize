@@ -13,10 +13,12 @@
   "license": "MIT",
   "dependencies": {
     "anitomy-js": "^5.0.0",
+    "case": "^1.6.3",
     "episode-parser": "^2.0.2",
     "hound": "^1.0.5",
-    "mime": "^2.5.2",
-    "parse-torrent-name": "^0.5.4"
+    "jsonschema": "^1.4.0",
+    "parse-torrent-name": "^0.5.4",
+    "string-template": "^1.0.0"
   },
   "devDependencies": {
     "jest": "^27.0.5"

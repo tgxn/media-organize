@@ -13,13 +13,32 @@ This plugin will never move your media files, because that's your _(or your torr
 - Standard Naming convention for shows/series
 - Support for [Jellyfin](https://jellyfin.org/) naming
 
-## Setup / Run
+## Configuration
 
-1. Open `config.json` and configure to your liking:
-  - Set directories to be scanned
-  - Set the target directory for links
-2. Start the scanner
+Config file is `config.json` and has the following properties:
 
+`directories`: `Array` of directories to scan
+`allowedExtensions`: `Array` of extension to allow, _(empty or omitted for all)_
+`targetPath`: Target for sorted fils
+`seriesCaseFormat`: Optional, a property of the [Case](https://www.npmjs.com/package/case) library
+`targetFormat`: Format of the output symlinks
+
+You can also specify an array of config objects if you have different file types/directories to scan
+
+### `targetFormat` formatter variables
+
+- `name`
+- `nameOptYear`
+- `season`
+- `episode`
+- `year`
+- `extension`
+
+
+## Run
+
+`nvm use 14`
+`node run.js`
 
 ## Modules Used
   
