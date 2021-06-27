@@ -44,7 +44,6 @@ async function performFileTests() {
     }
 }
 
-
 test('isMediaFile', (done) => {
 
     const test1 = isMovieOrSeries("Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn");
@@ -58,7 +57,6 @@ test('isMediaFile', (done) => {
 
     done();
 });
-
 
 test('run dynamic file tests', () => {
     return performFileTests()
