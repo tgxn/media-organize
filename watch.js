@@ -1,23 +1,49 @@
 const path = require('path');
 const hound = require('hound')
 
-const { directories, targetPath } = require('./config.json');
+const {
+    runOrganize
+} = require('./lib/organize')
 
-for (const index in directories) {
-    const scanDir = path.resolve(directories[index]);
+const { configArray } = require('./lib/config');
 
-    const watcher = hound.watch(scanDir)
-    console.log("Watching:", scanDir);
+const {
+    loadStorageObject,
+    saveStorageObject
+} = require('./lib/storage');
 
-    watcher.on('create', function (file, stats) {
-        console.log(file + ' was created')
-    });
+async function run() {
+    let storageObject = await loadStorageObject();
 
-    watcher.on('change', function (file, stats) {
-        console.log(file + ' was changed')
-    });
+    for (const index in configArray) {
+        const configData = configArray[index];
 
-    watcher.on('delete', function (file) {
-        console.log(file + ' was deleted')
-    });
+        const { directories, targetPath } = configData;
+
+        for (const index in directories) {
+            const scanDir = path.resolve(directories[index]);
+
+            const watcher = hound.watch(scanDir)
+            console.log("Watching:", scanDir);
+
+            watcher.on('create', async (file, stats) => {
+                console.log(file + ' was created')
+
+                await runOrganize(configData, storageObject)
+                    .then(() => {
+                        console.log(`${index} complete`);
+                    });
+
+            });
+
+            watcher.on('delete', async (file) => {
+                console.log(file + ' was deleted')
+
+            });
+        }
+    }
+
+    await saveStorageObject(storageObject);
 }
+
+run();
