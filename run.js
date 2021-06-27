@@ -4,12 +4,25 @@ const {
 
 const { configArray } = require('./lib/config');
 
-for (const index in configArray) {
-    const configData = configArray[index];
+const {
+    loadStorageObject,
+    saveStorageObject
+} = require('./lib/storage');
 
-    runOrganize(configData)
-        .then(files => {
-            console.log(`${index} complete`, files);
-        });
+async function run() {
+    let storageObject = await loadStorageObject();
 
+    for (const index in configArray) {
+        const configData = configArray[index];
+
+        await runOrganize(configData, storageObject)
+            .then(() => {
+                console.log(`${index} complete`);
+            });
+
+    }
+
+    await saveStorageObject(storageObject);
 }
+
+run();
