@@ -13,7 +13,7 @@
         "targetFormat": "{nameOptYear}/Season {season}/Episode {episode}.{extension}"
     },
     {
-        "enabled": true,
+        "enabled": false,
         "directories": [
             "../complete/movies/"
         ],
