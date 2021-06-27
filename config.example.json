@@ -1,0 +1,37 @@
+[
+    {
+        "directories": [
+            "../complete/tv_series/"
+        ],
+        "allowedExtensions": [
+            "mkv",
+            "avi"
+        ],
+        "strictType": "series",
+        "seriesCaseFormat": "capital",
+        "targetPath": "../sorted/Series",
+        "targetFormat": "{nameOptYear}/Season {season}/Episode {episode}.{extension}"
+    },
+    {
+        "enabled": false,
+        "directories": [
+            "../complete/movies/"
+        ],
+        "allowedExtensions": [
+            "mkv",
+            "avi"
+        ],
+        "ignoredExtensions": [
+            ".vob",
+            ".vts",
+            ".bup"
+        ],
+        "linkSubtitles": true,
+        "subtitleExtensions": [
+            ".srt"
+        ],
+        "strictType": "movie",
+        "targetPath": "../sorted/Movies",
+        "targetFormat": "Movies/{nameOptYear}/{name}.{extension}"
+    }
+]

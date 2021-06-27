@@ -6,20 +6,39 @@ Still WIP, but series symlinking is working.
 This plugin will never move your media files, because that's your _(or your torrent client's)_ job!
 
 ## Features
+   
+- Identify Series/Show/Anime Name   
+- Identify Season/Episode Numbers   
+- Create symlinks to the specified target   
+- Standard Naming convention for shows/series   
+- Support for [Jellyfin](https://jellyfin.org/) naming   
+   
+## Configuration
 
-- Identify Series/Show/Anime Name
-- Identify Season/Episode Numbers
-- Create symlinks to the specified target
-- Standard Naming convention for shows/series
-- Support for [Jellyfin](https://jellyfin.org/) naming
+Config file is `config.json` and has the following properties:
 
-## Setup / Run
+`directories`: `Array` of directories to scan   
+`allowedExtensions`: `Array` of extension to allow, _(empty or omitted for all)_   
+`targetPath`: Target for sorted fils   
+`seriesCaseFormat`: Optional, a property of the [Case](https://www.npmjs.com/package/case) library   
+`targetFormat`: Format of the output symlinks   
 
-1. Open `config.json` and configure to your liking:
-  - Set directories to be scanned
-  - Set the target directory for links
-2. Start the scanner
+You can also specify an array of config objects if you have different file types/directories to scan   
 
+### `targetFormat` formatter variables
+
+- `name`
+- `nameOptYear`
+- `season`
+- `episode`
+- `year`
+- `extension`
+
+
+## Run
+
+`nvm use 14`
+`node run.js`
 
 ## Modules Used
   

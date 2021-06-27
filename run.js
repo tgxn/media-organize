@@ -1,45 +1,28 @@
-const path = require('path');
-
 const {
-    getFiles,
-    isMediaFile,
-    isMovieOrSeries,
-    determineSeriesInfo,
-    formatSeriesPath,
-    createSymlink
+    runOrganize
 } = require('./lib/organize')
 
-const { directories, targetPath } = require('./config.json');
+const { configArray } = require('./lib/config');
 
-for (const index in directories) {
-    const scanDir = path.resolve(directories[index]);
+const {
+    loadStorageObject,
+    saveStorageObject
+} = require('./lib/storage');
 
-    getFiles(scanDir)
-        .then(files => {
-            files.map(async (filePath) => {
-                const fileInfo = path.parse(filePath);
+async function run() {
+    let storageObject = await loadStorageObject();
 
-                const fileIsMedia = await isMediaFile(filePath);
-                const movieOrSeries = isMovieOrSeries(filePath);
+    for (const index in configArray) {
+        const configData = configArray[index];
 
-                if (fileIsMedia && movieOrSeries == "series") {
-                    const fileMediaInfo = await determineSeriesInfo(fileInfo.name);
+        await runOrganize(configData, storageObject)
+            .then(() => {
+                console.log(`${index} complete`);
+            });
 
-                    if (fileMediaInfo) {
-                        const { name, season, episode } = fileMediaInfo;
+    }
 
-                        const targetLinkPath = formatSeriesPath(targetPath, { name, season, episode }, fileInfo.ext);
-                        console.log(filePath, targetLinkPath);
-
-                        //await createSymlink(filePath, targetLinkPath)
-                    }
-
-                } else {
-                    console.log("unknown file wtf???!!!", movieOrSeries);
-                }
-
-            })
-
-        })
-
+    await saveStorageObject(storageObject);
 }
+
+run();
