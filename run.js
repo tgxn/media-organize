@@ -9,14 +9,10 @@ const {
     createSymlink
 } = require('./lib/organize')
 
-const scanDirList = [
-    "../complete/",
-];
+const { directories, targetPath } = require('./config.json');
 
-const targetDir = "../sorted-media";
-
-for (const index in scanDirList) {
-    const scanDir = path.resolve(scanDirList[index]);
+for (const index in directories) {
+    const scanDir = path.resolve(directories[index]);
 
     getFiles(scanDir)
         .then(files => {
@@ -32,10 +28,10 @@ for (const index in scanDirList) {
                     if (fileMediaInfo) {
                         const { name, season, episode } = fileMediaInfo;
 
-                        const targetPath = formatSeriesPath(targetDir, { name, season, episode }, fileInfo.ext);
-                        console.log(filePath, targetPath);
+                        const targetLinkPath = formatSeriesPath(targetPath, { name, season, episode }, fileInfo.ext);
+                        console.log(filePath, targetLinkPath);
 
-                        //await createSymlink(filePath, targetPath)
+                        //await createSymlink(filePath, targetLinkPath)
                     }
 
                 } else {
