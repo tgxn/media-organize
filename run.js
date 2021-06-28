@@ -1,28 +1,10 @@
-const {
-    runOrganize
-} = require('./lib/organize')
-
-const { configArray } = require('./lib/config');
-
-const {
-    loadStorageObject,
-    saveStorageObject
-} = require('./lib/storage');
+const Organize = require('./lib/organize')
 
 async function run() {
-    let storageObject = await loadStorageObject();
+    let organizer = new Organize();
+    await organizer.loadStorage();
 
-    for (const index in configArray) {
-        const configData = configArray[index];
-
-        await runOrganize(configData, storageObject)
-            .then(() => {
-                console.log(`${index} complete`);
-            });
-
-    }
-
-    await saveStorageObject(storageObject);
+    await organizer.organizeAll();
 }
 
 run();

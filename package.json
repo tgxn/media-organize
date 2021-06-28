@@ -14,10 +14,13 @@
   "dependencies": {
     "anitomy-js": "^5.0.0",
     "case": "^1.6.3",
+    "cli-spinners": "^2.6.0",
     "episode-parser": "^2.0.2",
     "hound": "^1.0.5",
     "jsonschema": "^1.4.0",
+    "node-storage": "0.0.9",
     "parse-torrent-name": "^0.5.4",
+    "spinnies": "^0.5.1",
     "string-template": "^1.0.0"
   },
   "devDependencies": {
