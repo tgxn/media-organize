@@ -7,7 +7,8 @@
         "test": "jest",
         "start": "node ./bin/run.js",
         "watch": "nodemon ./bin/watch.js",
-        "prettier": "prettier --ignore-path .gitignore -c ./"
+        "prettier": "prettier --ignore-path .gitignore -c ./",
+        "format": "prettier --ignore-path .gitignore -w ./"
     },
     "bin": {
         "orgMedia": "./bin/orgMedia.js"
