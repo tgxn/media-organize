@@ -6,10 +6,7 @@
     "scripts": {
         "test": "jest",
         "start": "node run.js",
-        "prettier": "prettier -c ./"
-    },
-    "bin": {
-        "mediaScan": "cli.js"
+        "prettier": "prettier --ignore-path .gitignore -c ./"
     },
     "license": "MIT",
     "dependencies": {

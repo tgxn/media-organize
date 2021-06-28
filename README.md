@@ -38,10 +38,3 @@ You can also specify an array of config objects if you have different file types
 
 `nvm use 14`
 `node run.js`
-
-## Modules Used
-
-[skiptirengu / anitomy-js](https://github.com/skiptirengu/anitomy-js)  
-[tregusti / episode-parser](https://github.com/tregusti/episode-parser)  
-[broofa / mime](https://github.com/broofa/mime)  
-[jzjzjzj / parse-torrent-name](https://github.com/jzjzjzj/parse-torrent-name)

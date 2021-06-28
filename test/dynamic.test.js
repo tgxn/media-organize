@@ -106,6 +106,11 @@ test("isMovieOrSeries", async () => {
     );
     expect(testResult).toBe("series");
 
+    testResult = await organizeLayer.isMovieOrSeries(
+        path.parse("Highly.Questionable.2021.06.25.720p.HDTV.x264-NTb.mkv"),
+    );
+    expect(testResult).toBe("series");
+
     testResult = await organizeLayer.isMovieOrSeries("");
     expect(testResult).toBe(null);
 });
