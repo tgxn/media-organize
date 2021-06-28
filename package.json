@@ -1,28 +1,31 @@
 {
-  "name": "media-organizer",
-  "author": "tgxn <me@tgxn.net>",
-  "version": "1.0.0",
-  "main": "run.js",
-  "scripts": {
-    "start": "node run.js",
-    "test": "jest"
-  },
-  "bin": {
-    "mediaScan": "cli.js"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "anitomy-js": "^5.0.0",
-    "case": "^1.6.3",
-    "cli-spinners": "^2.6.0",
-    "episode-parser": "^2.0.2",
-    "hound": "^1.0.5",
-    "jsonschema": "^1.4.0",
-    "parse-torrent-name": "^0.5.4",
-    "spinnies": "^0.5.1",
-    "string-template": "^1.0.0"
-  },
-  "devDependencies": {
-    "jest": "^27.0.5"
-  }
+    "name": "media-organizer",
+    "author": "tgxn <me@tgxn.net>",
+    "version": "1.0.0",
+    "main": "run.js",
+    "scripts": {
+        "test": "jest",
+        "start": "node run.js",
+        "prettier": "prettier -c ./"
+    },
+    "bin": {
+        "mediaScan": "cli.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "anitomy-js": "^5.0.0",
+        "async": "^3.2.0",
+        "case": "^1.6.3",
+        "cli-spinners": "^2.6.0",
+        "episode-parser": "^2.0.2",
+        "hound": "^1.0.5",
+        "jsonschema": "^1.4.0",
+        "parse-torrent-name": "^0.5.4",
+        "spinnies": "^0.5.1",
+        "string-template": "^1.0.0"
+    },
+    "devDependencies": {
+        "jest": "^27.0.5",
+        "prettier": "^2.3.2"
+    }
 }
