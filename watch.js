@@ -4,7 +4,7 @@ async function run() {
     let organizer = new Organize();
     await organizer.loadStorage();
 
-    await organizer.organizeAll();
+    await organizer.registerWatchers();
 }
 
 run();
