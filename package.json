@@ -5,21 +5,28 @@
     "main": "run.js",
     "scripts": {
         "test": "jest",
-        "start": "node run.js",
+        "start": "node ./bin/run.js",
+        "watch": "nodemon ./bin/watch.js",
         "prettier": "prettier --ignore-path .gitignore -c ./"
+    },
+    "bin": {
+        "orgMedia": "./bin/orgMedia.js"
     },
     "license": "MIT",
     "dependencies": {
         "anitomy-js": "^5.0.0",
         "async": "^3.2.0",
         "case": "^1.6.3",
+        "chalk": "^4.1.1",
         "cli-spinners": "^2.6.0",
         "episode-parser": "^2.0.2",
         "hound": "^1.0.5",
         "jsonschema": "^1.4.0",
+        "nodemon": "^2.0.7",
         "parse-torrent-name": "^0.5.4",
         "spinnies": "^0.5.1",
-        "string-template": "^1.0.0"
+        "string-template": "^1.0.0",
+        "yargs": "^17.0.1"
     },
     "devDependencies": {
         "jest": "^27.0.5",

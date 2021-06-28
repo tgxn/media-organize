@@ -18,8 +18,15 @@ Requirements:
 
 -   NodeJS 12+
 
-Run Organize: `node run.js`
-Start Watchers: `node watch.js`
+#### Install
+
+`git clone https://github.com/tgxn/media-organize && cd media-organize`  
+`npm install -g .`
+
+#### Use
+
+Run Organize: `orgMedia`  
+Start Watchers: `orgMedia -w`
 
 ## Configuration
 

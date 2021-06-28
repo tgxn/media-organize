@@ -1,6 +1,6 @@
-const { Organize } = require("./lib/organize");
+const { Organize } = require("../lib/organize");
 
-const configFile = require("./config.json");
+const configFile = require("../config.json");
 
 async function run() {
     const organizer = new Organize(configFile);
