@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 
-const { Organize, OrganizerLayer } = require("../lib/organize");
+const { OrganizerLayer } = require("../lib/organize");
 
 const mockedStore = {
     findLinkWithSource: () => {},
@@ -56,6 +56,13 @@ async function performFileTests(testDataPath, configObject) {
         console.log("error", error);
     }
 }
+
+jest.mock("fs", () => ({
+    promises: {
+        readFile: jest.fn().mockResolvedValue({}),
+        stat: jest.fn().mockResolvedValue({ size: 123123123 }),
+    },
+}));
 
 test("isAllowedFile", async () => {
     let testResult;
