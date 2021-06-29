@@ -1,6 +1,12 @@
-# media-organizer
+# media-organize
 
-A utility for organizing a media collection via symbolic links.
+[![GitHub Issues](https://img.shields.io/github/issues/tgxn/media-organize.svg)](https://github.com/tgxn/media-organize/issues)
+[![npm version](https://img.shields.io/npm/v/media-organize.svg)](https://www.npmjs.com/package/media-organize)
+[![npm downloads](https://img.shields.io/npm/dm/media-organize.svg)](https://www.npmjs.com/package/media-organize)
+[![dependencies](https://img.shields.io/david/tgxn/media-organize.svg)](https://david-dm.org/tgxn/media-organize)
+[![devDependencies](https://img.shields.io/david/dev/tgxn/media-organize.svg)](https://david-dm.org/bevry/media-organize#info=devDependencies)
+
+A CLI utility for organizing your media collections via symbolic links.
 
 ✅ Auto-detect 📺 Series, 🐙 Anime and 🎬 Movies  
 ✅ No dependencies on external web services!  
@@ -51,11 +57,11 @@ And the following non-mandatory options:
 | `useHighestQuality`  | `false` | Should a higher-quality release replace a lower one?                 |
 | `strictType`         | _None_  | Whether this config block should only accept `movies` or `series`    |
 
-You can also specify an array of config objects if you have different file types/directories to scan. See [`config.example.json`](config.example.json) for an example of this.
+You can also specify an array of config objects if you have different file types/directories to scan. See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for an example of this.
 
 ##### `targetFormat` configuration
 
-See [`config.example.json`](config.example.json) for examples.
+See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for examples.
 
 | Variable        | Value                             | Example       |
 | --------------- | --------------------------------- | ------------- |
