@@ -1,13 +1,9 @@
-const fs = require("fs");
 const path = require("path");
 const { homedir } = require("os");
 
 const Memory = require("../lib/memory");
 
-jest.mock("fs");
-fs.readFileSync = () => {
-    return "{}";
-};
+// setup mocks
 let storeObject = {};
 jest.mock("../lib/storage", () => {
     return jest.fn().mockImplementation(() => {

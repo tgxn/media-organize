@@ -3,6 +3,7 @@ const { homedir } = require("os");
 
 const Config = require("../lib/config");
 
+// setup mocks
 let mockConfigData;
 jest.mock("fs", () => ({
     promises: {
@@ -19,6 +20,12 @@ test("parses home dir", () => {
     config = new Config("~/configFile");
     expect(config.configPath).toBe(`${homedir}${path.sep}configFile`);
     expect(config.configArray).toStrictEqual([]);
+});
+
+test("doesn't parse home dir", () => {
+    const config1 = new Config("/root/configFile");
+    expect(config1.configPath).toBe(`/root/configFile`);
+    expect(config1.configArray).toStrictEqual([]);
 });
 
 const mockConfigBasic = {
@@ -59,51 +66,3 @@ test("loadAndValidateConfig basic config array", () => {
         ]);
     });
 });
-
-// test("createLink", () => {
-//     store.createLink("/123/abc", "/link/abc/123", {
-//         whoa: "cool",
-//     });
-
-//     expect(store.linkFiles["/123/abc"].linkPath).toStrictEqual("/123/abc");
-
-//     expect(store.linkFiles["/123/abc"].sourcePath).toStrictEqual(
-//         "/link/abc/123",
-//     );
-
-//     expect(store.linkFiles["/123/abc"].metaData).toStrictEqual({
-//         whoa: "cool",
-//     });
-// });
-
-// test("findLink", () => {
-//     const link = store.findLink("/123/abc");
-
-//     expect(link).toStrictEqual({
-//         linkPath: "/123/abc",
-//         metaData: { whoa: "cool" },
-//         sourcePath: "/link/abc/123",
-//     });
-// });
-
-// test("findLinkWithSource", () => {
-//     const link = store.findLinkWithSource("/link/abc/123");
-
-//     expect(link).toStrictEqual({
-//         linkPath: "/123/abc",
-//         metaData: { whoa: "cool" },
-//         sourcePath: "/link/abc/123",
-//     });
-// });
-
-// test("deleteLink", () => {
-//     const link = store.deleteLink("/123/abc");
-
-//     expect(store.linkFiles["/123/abc"]).toBeUndefined();
-// });
-
-// test("findLink", () => {
-//     const link = store.findLink("/123/abc");
-
-//     expect(link).toBe(null);
-// });
