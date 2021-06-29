@@ -1,6 +1,15 @@
 {
     "name": "media-organize",
     "author": "tgxn <me@tgxn.net>",
+    "keywords": [
+        "javascript",
+        "cli",
+        "console",
+        "links",
+        "media",
+        "organize",
+        "organizer"
+    ],
     "version": "1.0.0",
     "repository": "https://github.com/tgxn/media-organize",
     "main": "run.js",
