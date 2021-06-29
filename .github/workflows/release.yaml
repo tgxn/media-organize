@@ -1,0 +1,17 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Add plugin for eslint commits
+        working-directory: ./.github/workflows
+        run: npm install conventional-changelog-eslint
+
+      - name: Release to GitHub
+        working-directory: ./.github/workflows
+        run: npx semantic-release
