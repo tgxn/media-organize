@@ -2,7 +2,6 @@
 
 [![GitHub Issues](https://img.shields.io/github/issues/tgxn/media-organize.svg)](https://github.com/tgxn/media-organize/issues)
 [![npm version](https://img.shields.io/npm/v/media-organize.svg)](https://www.npmjs.com/package/media-organize)
-[![npm downloads](https://img.shields.io/npm/dm/media-organize.svg)](https://www.npmjs.com/package/media-organize)
 [![dependencies](https://img.shields.io/david/tgxn/media-organize.svg)](https://david-dm.org/tgxn/media-organize)
 [![devDependencies](https://img.shields.io/david/dev/tgxn/media-organize.svg)](https://david-dm.org/bevry/media-organize#info=devDependencies)
 
