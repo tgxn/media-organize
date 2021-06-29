@@ -1,4 +1,4 @@
-name: Validate
+name: Test & Validate
 on: push
 permissions: read-all
 jobs:

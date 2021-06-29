@@ -7,7 +7,12 @@
                 "preset": "eslint"
             }
         ],
-        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/release-notes-generator",
+            {
+                "preset": "eslint"
+            }
+        ],
         [
             "@semantic-release/npm",
             {
@@ -18,7 +23,7 @@
         [
             "@semantic-release/github",
             {
-                "assets": { "path": "dist/*.tgz", "name": "NPM Package" }
+                "assets": "dist/*.tgz"
             }
         ]
     ]
