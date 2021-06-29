@@ -24,10 +24,19 @@ Requirements:
 
 -   NodeJS 12+
 
-#### Install
+#### Install from NPM
 
-`git clone https://github.com/tgxn/media-organize && cd media-organize`  
-`npm install -g .`
+```bash
+npm i -g media-organize
+```
+
+#### Install from Source
+
+```bash
+git clone https://github.com/tgxn/media-organize
+cd media-organize
+npm install -g .
+```
 
 #### Use
 
