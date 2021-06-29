@@ -28,9 +28,7 @@ test("parses home dir storeFile", () => {
     memory = new Memory("~/storeFile");
 
     return memory.loadStore().then(() => {
-        expect(memory.storageFileLocation).toBe(
-            `${homedir}${path.sep}storeFile`,
-        );
+        expect(memory.storageFileLocation).toBe(`${homedir}${path.sep}storeFile`);
         expect(memory.linkFiles).toStrictEqual({});
     });
 });
@@ -48,9 +46,7 @@ test("createLink", () => {
 
     expect(memory.linkFiles["/123/abc"].linkPath).toStrictEqual("/123/abc");
 
-    expect(memory.linkFiles["/123/abc"].sourcePath).toStrictEqual(
-        "/link/abc/123",
-    );
+    expect(memory.linkFiles["/123/abc"].sourcePath).toStrictEqual("/link/abc/123");
 
     expect(memory.linkFiles["/123/abc"].metaData).toStrictEqual({
         whoa: "cool",

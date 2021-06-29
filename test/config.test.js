@@ -30,9 +30,7 @@ const mockConfigBasic = {
 test("loadAndValidateConfig invalid config data", () => {
     mockConfigData = {};
     return config.loadAndValidateConfig().catch((errors) => {
-        expect(errors[0].toString()).toBe(
-            `instance[0] requires property "directories"`,
-        );
+        expect(errors[0].toString()).toBe(`instance[0] requires property "directories"`);
     });
 });
 

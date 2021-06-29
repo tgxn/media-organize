@@ -55,16 +55,12 @@ test("isMovieOrSeries", async () => {
     );
 
     testResult = await organizeLayer.isMovieOrSeries(
-        path.parse(
-            "Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn.mkv",
-        ),
+        path.parse("Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn.mkv"),
     );
     expect(testResult).toBe("movie");
 
     testResult = await organizeLayer.isMovieOrSeries(
-        path.parse(
-            "Invincible.2021.S01E08.Where.I.Really.Come.From.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb.mkv",
-        ),
+        path.parse("Invincible.2021.S01E08.Where.I.Really.Come.From.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb.mkv"),
     );
     expect(testResult).toBe("series");
 
