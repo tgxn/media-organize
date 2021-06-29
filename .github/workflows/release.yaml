@@ -3,10 +3,16 @@ on:
   push:
     branches:
       - master
+permissions: write-all
 jobs:
   Release:
     runs-on: ubuntu-latest
     steps:
+    
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
 
       - name: Add plugin for eslint commits
         run: npm install --no-save conventional-changelog-eslint

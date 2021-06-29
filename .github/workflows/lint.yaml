@@ -1,5 +1,6 @@
 name: Lint
 on: push
+permissions: read-all
 jobs:
   Prettier:
     runs-on: ubuntu-latest
