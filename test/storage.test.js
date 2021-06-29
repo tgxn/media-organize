@@ -9,6 +9,7 @@ jest.mock("fs", () => ({
     promises: {
         mkdir: jest.fn().mockResolvedValue(),
         access: jest.fn().mockResolvedValue(),
+        rename: jest.fn().mockResolvedValue(),
         writeFile: jest.fn().mockResolvedValue(),
         readFile: async () => {
             return JSON.stringify(mockFileData);
