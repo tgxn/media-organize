@@ -1,9 +1,13 @@
 const { Organize } = require("../lib/organize");
 
-const configFile = require("../config.json");
+const configLocations = {
+    config: "./config.json",
+    storage: "./data/storage.json",
+};
 
 async function run() {
-    const organizer = new Organize(configFile);
+    const organizer = new Organize(configLocations);
+    await organizer.loadConfig();
     await organizer.organizeAll();
 }
 
