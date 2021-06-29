@@ -35,6 +35,7 @@ function getConfigFromArgv(argv) {
         config: argv.config,
         storage: argv.storage,
     };
+    console.log("Data file paths:", configLocations);
     return configLocations;
 }
 

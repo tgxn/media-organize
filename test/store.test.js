@@ -10,7 +10,6 @@ fs.readFileSync = () => {
 };
 let storeObject = {};
 jest.mock("../lib/storage", () => {
-    // Works and lets you check for constructor calls:
     return jest.fn().mockImplementation(() => {
         return {
             get: (key) => {
@@ -23,13 +22,9 @@ jest.mock("../lib/storage", () => {
     });
 });
 
-const configLocations = {
-    config: "./config.json",
-    storage: "./data/storage.json",
-};
-
-const store = new Store("~/testFile");
+let store;
 test("parses home dir", () => {
+    store = new Store("~/testFile");
     expect(store.storageFileLocation).toBe(`${homedir}${path.sep}testFile`);
     expect(store.linkFiles).toStrictEqual({});
 });
