@@ -1,5 +1,9 @@
 name: Test & Validate
-on: push
+on:
+    push:
+    pull_request:
+        types: [closed]
+        branches: master
 permissions: read-all
 jobs:
     Prettier:
