@@ -2,7 +2,7 @@
     "name": "media-organize",
     "author": "tgxn <me@tgxn.net>",
     "version": "1.0.0",
-    "repository": "tgxn/media-organize",
+    "repository": "https://github.com/tgxn/media-organize",
     "main": "run.js",
     "scripts": {
         "test": "jest",
