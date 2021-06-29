@@ -18,7 +18,7 @@ A CLI utility for organizing your media collections via symbolic links.
 
 This plugin will never move your media files, because that's your _(or your torrent client's)_ job!
 
-## Usage
+## Installation
 
 Requirements:
 
@@ -38,7 +38,7 @@ cd media-organize
 npm install -g .
 ```
 
-#### Use
+## Usage
 
 Run Organize: `orgMedia`  
 Start Watchers: `orgMedia -w`
