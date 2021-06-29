@@ -3,13 +3,14 @@ const { homedir } = require("os");
 
 const Config = require("../lib/config");
 
-let mockConfigData;
+// setup mocks
+let mockFileData;
 jest.mock("fs", () => ({
     promises: {
         mkdir: jest.fn().mockResolvedValue(),
         access: jest.fn().mockResolvedValue(),
         readFile: async () => {
-            return JSON.stringify(mockConfigData);
+            return JSON.stringify(mockFileData);
         },
     },
 }));
@@ -21,6 +22,12 @@ test("parses home dir", () => {
     expect(config.configArray).toStrictEqual([]);
 });
 
+test("doesn't parse home dir", () => {
+    const config1 = new Config("/root/configFile");
+    expect(config1.configPath).toBe(`/root/configFile`);
+    expect(config1.configArray).toStrictEqual([]);
+});
+
 const mockConfigBasic = {
     directories: ["~/test/dir"],
     targetPath: "~/movies",
@@ -28,23 +35,21 @@ const mockConfigBasic = {
 };
 
 test("loadAndValidateConfig invalid config data", () => {
-    mockConfigData = {};
+    mockFileData = {};
     return config.loadAndValidateConfig().catch((errors) => {
-        expect(errors[0].toString()).toBe(
-            `instance[0] requires property "directories"`,
-        );
+        expect(errors[0].toString()).toBe(`instance[0] requires property "directories"`);
     });
 });
 
 test("loadAndValidateConfig basic config object", () => {
-    mockConfigData = mockConfigBasic;
+    mockFileData = mockConfigBasic;
     return config.loadAndValidateConfig().then((result) => {
         expect(result).toStrictEqual([mockConfigBasic]);
     });
 });
 
 test("loadAndValidateConfig basic config array", () => {
-    mockConfigData = [
+    mockFileData = [
         mockConfigBasic,
         {
             ...mockConfigBasic,
@@ -61,51 +66,3 @@ test("loadAndValidateConfig basic config array", () => {
         ]);
     });
 });
-
-// test("createLink", () => {
-//     store.createLink("/123/abc", "/link/abc/123", {
-//         whoa: "cool",
-//     });
-
-//     expect(store.linkFiles["/123/abc"].linkPath).toStrictEqual("/123/abc");
-
-//     expect(store.linkFiles["/123/abc"].sourcePath).toStrictEqual(
-//         "/link/abc/123",
-//     );
-
-//     expect(store.linkFiles["/123/abc"].metaData).toStrictEqual({
-//         whoa: "cool",
-//     });
-// });
-
-// test("findLink", () => {
-//     const link = store.findLink("/123/abc");
-
-//     expect(link).toStrictEqual({
-//         linkPath: "/123/abc",
-//         metaData: { whoa: "cool" },
-//         sourcePath: "/link/abc/123",
-//     });
-// });
-
-// test("findLinkWithSource", () => {
-//     const link = store.findLinkWithSource("/link/abc/123");
-
-//     expect(link).toStrictEqual({
-//         linkPath: "/123/abc",
-//         metaData: { whoa: "cool" },
-//         sourcePath: "/link/abc/123",
-//     });
-// });
-
-// test("deleteLink", () => {
-//     const link = store.deleteLink("/123/abc");
-
-//     expect(store.linkFiles["/123/abc"]).toBeUndefined();
-// });
-
-// test("findLink", () => {
-//     const link = store.findLink("/123/abc");
-
-//     expect(link).toBe(null);
-// });

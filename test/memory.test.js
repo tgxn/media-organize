@@ -1,17 +1,14 @@
-const fs = require("fs");
 const path = require("path");
 const { homedir } = require("os");
 
-const Store = require("../lib/store");
+const Memory = require("../lib/memory");
 
-jest.mock("fs");
-fs.readFileSync = () => {
-    return "{}";
-};
+// setup mocks
 let storeObject = {};
 jest.mock("../lib/storage", () => {
     return jest.fn().mockImplementation(() => {
         return {
+            load: jest.fn().mockResolvedValue(),
             get: (key) => {
                 return storeObject[key];
             },
@@ -22,37 +19,38 @@ jest.mock("../lib/storage", () => {
     });
 });
 
-let store;
-test("parses home dir", () => {
-    store = new Store("~/testFile");
-    expect(store.storageFileLocation).toBe(`${homedir}${path.sep}testFile`);
-    expect(store.linkFiles).toStrictEqual({});
+let memory;
+test("parses home dir storeFile", () => {
+    memory = new Memory("~/storeFile");
+
+    return memory.loadStore().then(() => {
+        expect(memory.storageFileLocation).toBe(`${homedir}${path.sep}storeFile`);
+        expect(memory.linkFiles).toStrictEqual({});
+    });
 });
 
 test("findLink", () => {
-    const link = store.findLink("/123/abc");
+    const link = memory.findLink("/123/abc");
 
     expect(link).toBe(null);
 });
 
 test("createLink", () => {
-    store.createLink("/123/abc", "/link/abc/123", {
+    memory.createLink("/123/abc", "/link/abc/123", {
         whoa: "cool",
     });
 
-    expect(store.linkFiles["/123/abc"].linkPath).toStrictEqual("/123/abc");
+    expect(memory.linkFiles["/123/abc"].linkPath).toStrictEqual("/123/abc");
 
-    expect(store.linkFiles["/123/abc"].sourcePath).toStrictEqual(
-        "/link/abc/123",
-    );
+    expect(memory.linkFiles["/123/abc"].sourcePath).toStrictEqual("/link/abc/123");
 
-    expect(store.linkFiles["/123/abc"].metaData).toStrictEqual({
+    expect(memory.linkFiles["/123/abc"].metaData).toStrictEqual({
         whoa: "cool",
     });
 });
 
 test("findLink", () => {
-    const link = store.findLink("/123/abc");
+    const link = memory.findLink("/123/abc");
 
     expect(link).toStrictEqual({
         linkPath: "/123/abc",
@@ -62,7 +60,7 @@ test("findLink", () => {
 });
 
 test("findLinkWithSource", () => {
-    const link = store.findLinkWithSource("/link/abc/123");
+    const link = memory.findLinkWithSource("/link/abc/123");
 
     expect(link).toStrictEqual({
         linkPath: "/123/abc",
@@ -72,13 +70,13 @@ test("findLinkWithSource", () => {
 });
 
 test("deleteLink", () => {
-    const link = store.deleteLink("/123/abc");
+    const link = memory.deleteLink("/123/abc");
 
-    expect(store.linkFiles["/123/abc"]).toBeUndefined();
+    expect(memory.linkFiles["/123/abc"]).toBeUndefined();
 });
 
 test("findLink", () => {
-    const link = store.findLink("/123/abc");
+    const link = memory.findLink("/123/abc");
 
     expect(link).toBe(null);
 });
