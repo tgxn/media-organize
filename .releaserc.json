@@ -8,6 +8,18 @@
             }
         ],
         "@semantic-release/release-notes-generator",
-        "@semantic-release/github"
+        [
+            "@semantic-release/npm",
+            {
+                "npmPublish": true,
+                "tarballDir": "dist"
+            }
+        ],
+        [
+            "@semantic-release/github",
+            {
+                "assets": { "path": "dist/*.tgz", "name": "NPM Package" }
+            }
+        ]
     ]
 }
