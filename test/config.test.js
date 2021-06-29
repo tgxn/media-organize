@@ -4,13 +4,13 @@ const { homedir } = require("os");
 const Config = require("../lib/config");
 
 // setup mocks
-let mockConfigData;
+let mockFileData;
 jest.mock("fs", () => ({
     promises: {
         mkdir: jest.fn().mockResolvedValue(),
         access: jest.fn().mockResolvedValue(),
         readFile: async () => {
-            return JSON.stringify(mockConfigData);
+            return JSON.stringify(mockFileData);
         },
     },
 }));
@@ -35,21 +35,21 @@ const mockConfigBasic = {
 };
 
 test("loadAndValidateConfig invalid config data", () => {
-    mockConfigData = {};
+    mockFileData = {};
     return config.loadAndValidateConfig().catch((errors) => {
         expect(errors[0].toString()).toBe(`instance[0] requires property "directories"`);
     });
 });
 
 test("loadAndValidateConfig basic config object", () => {
-    mockConfigData = mockConfigBasic;
+    mockFileData = mockConfigBasic;
     return config.loadAndValidateConfig().then((result) => {
         expect(result).toStrictEqual([mockConfigBasic]);
     });
 });
 
 test("loadAndValidateConfig basic config array", () => {
-    mockConfigData = [
+    mockFileData = [
         mockConfigBasic,
         {
             ...mockConfigBasic,
