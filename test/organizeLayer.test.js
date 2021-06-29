@@ -12,51 +12,6 @@ const mockedStore = {
 
 const configArray = require("../config.example.json");
 
-async function performFileTests(testDataPath, configObject) {
-    try {
-        const fileData = await fs.readFile(testDataPath);
-        const parsedTestFileData = JSON.parse(fileData);
-
-        const testResults = await Promise.all(
-            parsedTestFileData.map(async (testFilePath) => {
-                const parsedPath = path.parse(testFilePath);
-
-                const organizeLayer = new OrganizerLayer(
-                    {
-                        store: mockedStore,
-                        configArray,
-                    },
-                    0,
-                );
-
-                const fileIsMedia = await organizeLayer.isAllowedFile(
-                    testFilePath,
-                    configObject,
-                );
-
-                const movieOrSeries = await organizeLayer.isMovieOrSeries(
-                    parsedPath,
-                );
-
-                const fileMediaInfo = await organizeLayer.determineMediaInfo(
-                    parsedPath.name,
-                    movieOrSeries,
-                );
-
-                return {
-                    isAllowedFile: fileIsMedia,
-                    movieOrSeries: movieOrSeries,
-                    fileMediaInfo: fileMediaInfo,
-                };
-            }),
-        );
-
-        return testResults;
-    } catch (error) {
-        console.log("error", error);
-    }
-}
-
 jest.mock("fs", () => ({
     promises: {
         readFile: jest.fn().mockResolvedValue({}),
@@ -120,30 +75,4 @@ test("isMovieOrSeries", async () => {
 
     testResult = await organizeLayer.isMovieOrSeries("");
     expect(testResult).toBe(null);
-});
-
-test("run movie file tests", () => {
-    return performFileTests(
-        "./test/data/test-movies.json",
-        configArray[1],
-    ).then((data) => {
-        for (const result in data) {
-            if (data[result].isAllowedFile) {
-                expect(data[result].movieOrSeries).toBe("movie");
-            }
-        }
-    });
-});
-
-test("run series file tests", () => {
-    return performFileTests(
-        "./test/data/test-series.json",
-        configArray[0],
-    ).then((data) => {
-        for (const result in data) {
-            if (data[result].isAllowedFile) {
-                expect(data[result].movieOrSeries).toBe("series");
-            }
-        }
-    });
 });
