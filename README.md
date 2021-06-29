@@ -4,6 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/media-organize.svg)](https://www.npmjs.com/package/media-organize)
 [![dependencies](https://img.shields.io/david/tgxn/media-organize.svg)](https://david-dm.org/tgxn/media-organize)
 [![devDependencies](https://img.shields.io/david/dev/tgxn/media-organize.svg)](https://david-dm.org/bevry/media-organize#info=devDependencies)
+[![license](https://img.shields.io/github/license/tgxn/media-organize.svg)](https://github.com/tgxn/media-organize/LICENSE)
 
 A CLI utility for organizing your media collections via symbolic links.
 
