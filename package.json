@@ -14,7 +14,7 @@
     "repository": "https://github.com/tgxn/media-organize",
     "main": "run.js",
     "scripts": {
-        "test": "jest",
+        "test": "jest --collectCoverage",
         "start": "node ./bin/run.js",
         "watch": "nodemon ./bin/watch.js",
         "prettier": "prettier --ignore-path .gitignore -c ./",
