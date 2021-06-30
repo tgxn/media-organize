@@ -1,4 +1,4 @@
-const { Organize } = require("../lib/organize");
+const Organize = require("../lib/organize");
 
 const configLocations = {
     config: "./config.json",

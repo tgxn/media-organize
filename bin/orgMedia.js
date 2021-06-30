@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { Organize } = require("../lib/organize");
+const Organize = require("../lib/organize");
 
 const yargs = require("yargs");
 
