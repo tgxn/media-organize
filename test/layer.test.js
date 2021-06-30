@@ -1,6 +1,3 @@
-const fs = require("fs").promises;
-const path = require("path");
-
 const OrganizerLayer = require("../lib/layer");
 
 const mockedMemory = {
