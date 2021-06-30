@@ -2,7 +2,7 @@ const { Organize } = require("../lib/organize");
 
 const configLocations = {
     config: "./config.json",
-    storage: "./data/storage.json",
+    storage: "./data/storage.json"
 };
 
 async function run() {

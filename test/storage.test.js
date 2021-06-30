@@ -13,8 +13,8 @@ jest.mock("fs", () => ({
         writeFile: jest.fn().mockResolvedValue(),
         readFile: async () => {
             return JSON.stringify(mockFileData);
-        },
-    },
+        }
+    }
 }));
 
 let store;

@@ -14,7 +14,7 @@ jest.mock("../lib/storage", () => {
             },
             put: (key, value) => {
                 storeObject[key] = value;
-            },
+            }
         };
     });
 });
@@ -37,7 +37,7 @@ test("findLink", () => {
 
 test("createLink", () => {
     memory.createLink("/123/abc", "/link/abc/123", {
-        whoa: "cool",
+        whoa: "cool"
     });
 
     expect(memory.linkFiles["/123/abc"].linkPath).toStrictEqual("/123/abc");
@@ -45,7 +45,7 @@ test("createLink", () => {
     expect(memory.linkFiles["/123/abc"].sourcePath).toStrictEqual("/link/abc/123");
 
     expect(memory.linkFiles["/123/abc"].metaData).toStrictEqual({
-        whoa: "cool",
+        whoa: "cool"
     });
 });
 
@@ -55,7 +55,7 @@ test("findLink", () => {
     expect(link).toStrictEqual({
         linkPath: "/123/abc",
         metaData: { whoa: "cool" },
-        sourcePath: "/link/abc/123",
+        sourcePath: "/link/abc/123"
     });
 });
 
@@ -65,7 +65,7 @@ test("findLinkWithSource", () => {
     expect(link).toStrictEqual({
         linkPath: "/123/abc",
         metaData: { whoa: "cool" },
-        sourcePath: "/link/abc/123",
+        sourcePath: "/link/abc/123"
     });
 });
 
