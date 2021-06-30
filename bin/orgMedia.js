@@ -42,7 +42,7 @@ function getConfigFromArgv(argv) {
         config: argv.config,
         storage: argv.storage
     };
-    logger.log("Data file paths:", configLocations);
+    logger.info("Data file paths:", configLocations);
     return configLocations;
 }
 
