@@ -1,5 +1,5 @@
-node_modules/
-config.json
-data/
-coverage/
 /logs/
+/node_modules/
+/config.json
+/coverage/
+/data/

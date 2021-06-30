@@ -2,7 +2,7 @@
 
 const logger = require("../lib/logger");
 
-const { Organize } = require("../lib/organize");
+const Organize = require("../lib/organize");
 
 const yargs = require("yargs");
 

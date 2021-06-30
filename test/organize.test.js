@@ -1,4 +1,4 @@
-const { Organize } = require("../lib/organize");
+const Organize = require("../lib/organize");
 
 const configArray = require("../config.example.json");
 
