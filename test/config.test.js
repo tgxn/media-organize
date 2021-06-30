@@ -11,8 +11,8 @@ jest.mock("fs", () => ({
         access: jest.fn().mockResolvedValue(),
         readFile: async () => {
             return JSON.stringify(mockFileData);
-        },
-    },
+        }
+    }
 }));
 
 let config;
@@ -31,7 +31,7 @@ test("doesn't parse home dir", () => {
 const mockConfigBasic = {
     directories: ["~/test/dir"],
     targetPath: "~/movies",
-    targetFormat: "Movies/{nameOptYear}.{extension}",
+    targetFormat: "Movies/{nameOptYear}.{extension}"
 };
 
 test("loadAndValidateConfig invalid config data", () => {
@@ -53,16 +53,16 @@ test("loadAndValidateConfig basic config array", () => {
         mockConfigBasic,
         {
             ...mockConfigBasic,
-            enabled: false,
-        },
+            enabled: false
+        }
     ];
     return config.loadAndValidateConfig().then((result) => {
         expect(result).toStrictEqual([
             mockConfigBasic,
             {
                 ...mockConfigBasic,
-                enabled: false,
-            },
+                enabled: false
+            }
         ]);
     });
 });

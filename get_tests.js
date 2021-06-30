@@ -12,7 +12,7 @@ getFiles(scanDir)
         return Promise.all(
             files.map(async (filePath) => {
                 return filePath.replace(scanDir + path.sep, "");
-            }),
+            })
         );
     })
 

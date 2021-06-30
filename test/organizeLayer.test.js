@@ -7,14 +7,14 @@ const mockedMemory = {
     findLinkWithSource: () => {},
     deleteLink: () => {},
     findLink: () => {},
-    createLink: () => {},
+    createLink: () => {}
 };
 
 const mockConfigBasic = {
     directories: ["~/test/dir"],
     allowedExtensions: ["mkv"],
     targetPath: "../sorted/Series",
-    targetFormat: "{nameOptYear}/Season {season}/Episode {episode}.{extension}",
+    targetFormat: "{nameOptYear}/Season {season}/Episode {episode}.{extension}"
 };
 
 jest.mock("fs", () => ({
@@ -22,8 +22,8 @@ jest.mock("fs", () => ({
         readFile: jest.fn().mockResolvedValue({}),
         mkdir: jest.fn().mockResolvedValue({}),
         symlink: jest.fn().mockResolvedValue({}),
-        stat: jest.fn().mockResolvedValue({ size: 123123123 }),
-    },
+        stat: jest.fn().mockResolvedValue({ size: 123123123 })
+    }
 }));
 
 test("isAllowedFile", async () => {
@@ -32,9 +32,9 @@ test("isAllowedFile", async () => {
     const organizeLayer = new OrganizerLayer(
         {
             memory: mockedMemory,
-            configArray: [mockConfigBasic],
+            configArray: [mockConfigBasic]
         },
-        0,
+        0
     );
 
     testResult = await organizeLayer.isAllowedFile("yhjkjk.tmp");
@@ -56,23 +56,23 @@ test("isMovieOrSeries", async () => {
     const organizeLayer = new OrganizerLayer(
         {
             memory: mockedMemory,
-            configArray: [mockConfigBasic],
+            configArray: [mockConfigBasic]
         },
-        0,
+        0
     );
 
     testResult = await organizeLayer.isMovieOrSeries(
-        path.parse("Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn.mkv"),
+        path.parse("Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn.mkv")
     );
     expect(testResult).toBe("movie");
 
     testResult = await organizeLayer.isMovieOrSeries(
-        path.parse("Invincible.2021.S01E08.Where.I.Really.Come.From.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb.mkv"),
+        path.parse("Invincible.2021.S01E08.Where.I.Really.Come.From.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb.mkv")
     );
     expect(testResult).toBe("series");
 
     testResult = await organizeLayer.isMovieOrSeries(
-        path.parse("Highly.Questionable.2021.06.25.720p.HDTV.x264-NTb.mkv"),
+        path.parse("Highly.Questionable.2021.06.25.720p.HDTV.x264-NTb.mkv")
     );
     expect(testResult).toBe("series");
 
@@ -83,9 +83,9 @@ test("isMovieOrSeries", async () => {
 const determineMediaInfo_organizeLayer = new OrganizerLayer(
     {
         memory: mockedMemory,
-        configArray: [mockConfigBasic],
+        configArray: [mockConfigBasic]
     },
-    0,
+    0
 );
 
 test("determineMediaInfo - series", async () => {
@@ -93,7 +93,7 @@ test("determineMediaInfo - series", async () => {
 
     testResult = await determineMediaInfo_organizeLayer.determineMediaInfo(
         "Invincible.2021.S01E08.Where.I.Really.Come.From.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb.mkv",
-        "series",
+        "series"
     );
     expect(testResult).toStrictEqual({
         codec: "x264",
@@ -103,7 +103,7 @@ test("determineMediaInfo - series", async () => {
         quality: 1080,
         season: 1,
         source: "webdl",
-        year: 2021,
+        year: 2021
     });
 });
 
@@ -112,7 +112,7 @@ test("determineMediaInfo - anime", async () => {
 
     testResult = await determineMediaInfo_organizeLayer.determineMediaInfo(
         "[HorribleSubs] Drifters - 02 [1080p].mkv",
-        "series",
+        "series"
     );
     expect(testResult).toStrictEqual({
         codec: undefined,
@@ -122,7 +122,7 @@ test("determineMediaInfo - anime", async () => {
         quality: "1080p",
         season: "00",
         source: undefined,
-        year: null,
+        year: null
     });
 });
 
@@ -131,7 +131,7 @@ test("determineMediaInfo - movie", async () => {
 
     testResult = await determineMediaInfo_organizeLayer.determineMediaInfo(
         "Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn.mkv",
-        "movie",
+        "movie"
     );
     expect(testResult).toStrictEqual({
         codec: undefined,
@@ -141,7 +141,7 @@ test("determineMediaInfo - movie", async () => {
         quality: "1080p",
         season: null,
         source: null,
-        year: 2005,
+        year: 2005
     });
 });
 
@@ -149,9 +149,9 @@ test("formatSeriesPath", async () => {
     const organizeLayer = new OrganizerLayer(
         {
             memory: mockedMemory,
-            configArray: [mockConfigBasic],
+            configArray: [mockConfigBasic]
         },
-        0,
+        0
     );
 
     const outString = organizeLayer.formatSeriesPath(
@@ -159,11 +159,11 @@ test("formatSeriesPath", async () => {
             name: "testing",
             year: 2011,
             season: 1,
-            episode: 2,
+            episode: 2
         },
         {
-            ext: ".test",
-        },
+            ext: ".test"
+        }
     );
 
     expect(outString).toBe("../sorted/Series/testing (2011)/Season 1/Episode 2.test");
@@ -173,12 +173,12 @@ test("createSymlink", async () => {
     const organizeLayer = new OrganizerLayer(
         {
             memory: mockedMemory,
-            configArray: [mockConfigBasic],
+            configArray: [mockConfigBasic]
         },
-        0,
+        0
     );
 
     await organizeLayer.createSymlink("/123/abc", "/link/abc/123", {
-        whoa: "cool",
+        whoa: "cool"
     });
 });

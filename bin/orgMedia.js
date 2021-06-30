@@ -9,31 +9,31 @@ yargs
         alias: "config",
         default: "~/.orgMedia/config.json",
         describe: "Config file location",
-        type: "string",
+        type: "string"
     })
     .option("s", {
         alias: "storage",
         default: "~/.orgMedia/storage.json",
         describe: "Storage file location",
-        type: "string",
+        type: "string"
     })
     .command({
         command: "$0",
         aliases: ["run"],
         desc: "run media organization",
-        handler: run,
+        handler: run
     })
     .command({
         command: "watch",
         aliases: ["w"],
         desc: "start media watchers",
-        handler: watch,
+        handler: watch
     }).argv;
 
 function getConfigFromArgv(argv) {
     const configLocations = {
         config: argv.config,
-        storage: argv.storage,
+        storage: argv.storage
     };
     console.log("Data file paths:", configLocations);
     return configLocations;

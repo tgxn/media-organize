@@ -4,7 +4,7 @@ const configArray = require("../config.example.json");
 
 const configLocations = {
     config: "./config.json",
-    storage: "./data/storage.json",
+    storage: "./data/storage.json"
 };
 
 let mockFileData = configArray;
@@ -18,8 +18,8 @@ jest.mock("fs", () => ({
         readdir: jest
             .fn()
             .mockResolvedValue(["Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn.mkv"]),
-        stat: jest.fn().mockResolvedValue({ size: 123123123 }),
-    },
+        stat: jest.fn().mockResolvedValue({ size: 123123123 })
+    }
 }));
 
 let organize;
