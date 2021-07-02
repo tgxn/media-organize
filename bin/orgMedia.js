@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+const logger = require("../lib/logger");
+const { createTransport } = require("../lib/logger");
+
 const Organize = require("../lib/organize");
 
 const yargs = require("yargs");
@@ -16,6 +19,11 @@ yargs
         default: "~/.orgMedia/storage.json",
         describe: "Storage file location",
         type: "string"
+    })
+    .option("l", {
+        alias: "log",
+        default: false,
+        describe: "Log file location"
     })
     .command({
         command: "$0",
@@ -35,7 +43,17 @@ function getConfigFromArgv(argv) {
         config: argv.config,
         storage: argv.storage
     };
-    console.log("Data file paths:", configLocations);
+    if (argv.log) {
+        logger.add(
+            createTransport({
+                filename: "./logs/organize-%DATE%.log",
+                datePattern: "YYYY-MM-DD-HH",
+                maxSize: "20m",
+                maxFiles: 10
+            })
+        );
+    }
+    logger.info("Data file paths:", configLocations);
     return configLocations;
 }
 
