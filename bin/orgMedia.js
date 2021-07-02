@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const logger = require("../lib/logger");
+const { createTransport } = require("../lib/logger");
 
 const Organize = require("../lib/organize");
 
@@ -42,6 +43,16 @@ function getConfigFromArgv(argv) {
         config: argv.config,
         storage: argv.storage
     };
+    if (argv.log) {
+        logger.add(
+            createTransport({
+                filename: "./logs/organize-%DATE%.log",
+                datePattern: "YYYY-MM-DD-HH",
+                maxSize: "20m",
+                maxFiles: 10
+            })
+        );
+    }
     logger.info("Data file paths:", configLocations);
     return configLocations;
 }

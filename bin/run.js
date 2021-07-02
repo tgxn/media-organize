@@ -1,3 +1,6 @@
+const logger = require("../lib/logger");
+const { createTransport } = require("../lib/logger");
+
 const Organize = require("../lib/organize");
 
 const configLocations = {
