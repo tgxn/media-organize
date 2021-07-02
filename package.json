@@ -23,6 +23,10 @@
     "bin": {
         "orgMedia": "./bin/orgMedia.js"
     },
+    "files": [
+        "lib/",
+        "bin/"
+    ],
     "license": "MIT",
     "dependencies": {
         "anitomy-js": "^5.0.0",
