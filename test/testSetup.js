@@ -9,6 +9,7 @@ jest.mock("winston", () => ({
         log: jest.fn()
     }),
     transports: {
+        Console: jest.fn(),
         DailyRotateFile: jest.fn()
     }
 }));
