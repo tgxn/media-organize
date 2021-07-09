@@ -86,7 +86,7 @@ And the following non-mandatory options:
 | `enabled`            | `true`  |                                                                           |
 | `allowedExtensions`  | `*`     | `Array` Extension to allow, _(empty or omitted for all)_                  |
 | `ignoredExtensions`  | _None_  | `Array` Extensions to ignore                                              |
-| `seriesCaseFormat`   | _None_  | A property of the [Case](https://www.npmjs.com/package/case) library      |
+| `seriesCaseFormat`   | _None_  | A property of the [Case](https://github.com/nbubna/Case) library          |
 | `linkSubtitles`      | `false` | Should subtitle files be copied alongside media files?                    |
 | `subtitleExtensions` | _None_  | Extensions to link with media                                             |
 | `useHighestQuality`  | `false` | Should a higher-quality release replace a lower one?                      |
