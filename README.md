@@ -63,10 +63,10 @@ Options:
 
 ### Automatic Methods
 
-Cron (Regular Runs)
+Cron (Regular Runs)  
 `orgMedia -c /path/to/config.json -l /path/to/logs/`
 
-Watcher/Screen _(creates a screen named `media_watcher` watching your media)_
+Watcher/Screen _(creates a screen named `media_watcher` watching your media)_  
 `screen -S media_watcher -dm orgMedia watch -c config.json -l ./logs/`
 
 ## Configuration
