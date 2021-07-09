@@ -12,13 +12,13 @@ yargs(hideBin(process.argv))
     .option("c", {
         alias: "config",
         default: "~/.orgMedia/config.json",
-        describe: "Config file location",
+        describe: "config.json file location",
         type: "string"
     })
     .option("s", {
         alias: "storage",
         default: "~/.orgMedia/storage.json",
-        describe: "Storage file location",
+        describe: "storage.json file location",
         type: "string"
     })
     .option("l", {
@@ -56,12 +56,7 @@ function getConfigFromArgv(argv) {
     });
 
     if (argv.log) {
-        addFileTransport({
-            filename: argv.log,
-            datePattern: "YYYY-MM-DD-HH",
-            maxSize: "20m",
-            maxFiles: 10
-        });
+        addFileTransport(argv.log);
     }
 
     logger.info("data file paths", configLocations);
