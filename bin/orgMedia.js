@@ -52,13 +52,12 @@ function getConfigFromArgv(argv) {
     };
 
     addConsoleTransport({
-        level: argv.quiet ? "error" : "debug"
-        // silent: argv.quiet
+        level: argv.quiet ? "error" : "info"
     });
 
     if (argv.log) {
         addFileTransport({
-            filename: "./logs/organize-%DATE%.log",
+            filename: argv.log,
             datePattern: "YYYY-MM-DD-HH",
             maxSize: "20m",
             maxFiles: 10
