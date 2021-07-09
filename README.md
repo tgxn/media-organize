@@ -15,7 +15,7 @@ A CLI utility for organizing your media collections via symbolic links.
 ✅ Unlinks ❌ deleted files  
 ✅ Customizable Naming Format  
 ✅ Multiple Directory Support  
-✅Logging with rotation
+✅ Logging with rotation
 
 This plugin will never move your media files, because that's your _(or your torrent client's)_ job!
 
