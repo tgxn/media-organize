@@ -15,6 +15,7 @@ A CLI utility for organizing your media collections via symbolic links.
 ✅ Unlinks ❌ deleted files  
 ✅ Customizable Naming Format  
 ✅ Multiple Directory Support
+✅Logging with rotation
 
 This plugin will never move your media files, because that's your _(or your torrent client's)_ job!
 
@@ -40,7 +41,11 @@ npm install -g .
 
 ## Usage
 
-```bash
+```
+orgMedia
+
+run media organization
+
 Commands:
   orgMedia run    run media organization                               [default]
   orgMedia watch  start media watchers                              [aliases: w]
@@ -48,20 +53,21 @@ Commands:
 Options:
       --help     Show help                                             [boolean]
       --version  Show version number                                   [boolean]
-  -c, --config   Config file location
+  -c, --config   config.json file location
                                    [string] [default: "~/.orgMedia/config.json"]
-  -s, --storage  Storage file location
+  -s, --storage  storage.json file location
                                   [string] [default: "~/.orgMedia/storage.json"]
-  -l, --log      Log file location                              [default: false]
+  -l, --log      log directory path                             [default: false]
+  -q, --quiet    hide console log output              [boolean] [default: false]
 ```
 
 ### Automatic Methods
 
-Cron (Ragular Runs)
-`orgMedia -c /path/to/config -l /path/to/log`
+Cron (Regular Runs)
+`orgMedia -c /path/to/config.json -l /path/to/logs/`
 
-Watcher (Screen)
-`screen -S media-watcher -d -m orgMedia watch`
+Watcher/Screen _(creates a screen named `media_watcher` watching your media)_
+`screen -S media_watcher -dm orgMedia watch -c config.json -l ./logs/`
 
 ## Configuration
 
