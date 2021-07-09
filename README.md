@@ -40,8 +40,28 @@ npm install -g .
 
 ## Usage
 
-Run Organize: `orgMedia`  
-Start Watchers: `orgMedia -w`
+```bash
+Commands:
+  orgMedia run    run media organization                               [default]
+  orgMedia watch  start media watchers                              [aliases: w]
+
+Options:
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
+  -c, --config   Config file location
+                                   [string] [default: "~/.orgMedia/config.json"]
+  -s, --storage  Storage file location
+                                  [string] [default: "~/.orgMedia/storage.json"]
+  -l, --log      Log file location                              [default: false]
+```
+
+### Automatic Methods
+
+Cron (Ragular Runs)
+`orgMedia -c /path/to/config -l /path/to/log`
+
+Watcher (Screen)
+`screen -S media-watcher -d -m orgMedia watch`
 
 ## Configuration
 
