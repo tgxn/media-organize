@@ -32,6 +32,7 @@ test("determineMediaInfo - series", async () => {
     expect(testResult).toStrictEqual({
         codec: "x264",
         episode: 8,
+        fileName: "Invincible.2021.S01E08.Where.I.Really.Come.From.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb",
         group: "NTb",
         name: "Invincible",
         quality: 1080,
@@ -48,6 +49,7 @@ test("determineMediaInfo - anime", async () => {
     expect(testResult).toStrictEqual({
         codec: undefined,
         episode: "02",
+        fileName: "[HorribleSubs] Drifters - 02 [1080p]",
         group: "HorribleSubs",
         name: "Drifters",
         quality: "1080p",
@@ -67,6 +69,7 @@ test("determineMediaInfo - movie", async () => {
     expect(testResult).toStrictEqual({
         codec: undefined,
         episode: null,
+        fileName: "Get.Rich.Or.Die.Tryin.2005.1080p.BluRay.REMUX.AVC.TrueHD.5.1-UnKn0wn",
         group: "REMUX.AVC.TrueHD.5.1-UnKn0wn.mkv",
         name: "Get Rich Or Die Tryin",
         quality: "1080p",
