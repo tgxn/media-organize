@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
 const logger = require("../lib/logger");
-const { addFileTransport } = require("../lib/logger");
+const { addConsoleTransport, addFileTransport } = require("../lib/logger");
 
 const Organize = require("../lib/organize");
 
-const yargs = require("yargs");
+const yargs = require("yargs/yargs");
+const { hideBin } = require("yargs/helpers");
 
-yargs
+yargs(hideBin(process.argv))
     .option("c", {
         alias: "config",
         default: "~/.orgMedia/config.json",
@@ -23,7 +24,13 @@ yargs
     .option("l", {
         alias: "log",
         default: false,
-        describe: "Log file location"
+        describe: "log directory path"
+    })
+    .option("q", {
+        alias: "quiet",
+        type: "boolean",
+        default: false,
+        describe: "hide console log output"
     })
     .command({
         command: "$0",
@@ -43,6 +50,12 @@ function getConfigFromArgv(argv) {
         config: argv.config,
         storage: argv.storage
     };
+
+    addConsoleTransport({
+        level: argv.quiet ? "error" : "debug"
+        // silent: argv.quiet
+    });
+
     if (argv.log) {
         addFileTransport({
             filename: "./logs/organize-%DATE%.log",
@@ -51,7 +64,8 @@ function getConfigFromArgv(argv) {
             maxFiles: 10
         });
     }
-    logger.info("Data file paths:", configLocations);
+
+    logger.info("data file paths", configLocations);
     return configLocations;
 }
 

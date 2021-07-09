@@ -1,5 +1,4 @@
-const logger = require("../lib/logger");
-const { createTransport } = require("../lib/logger");
+const { addConsoleTransport } = require("../lib/logger");
 
 const Organize = require("../lib/organize");
 
@@ -14,4 +13,5 @@ async function run() {
     await organizer.registerWatchers();
 }
 
+addConsoleTransport();
 run();
