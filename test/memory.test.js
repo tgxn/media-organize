@@ -55,7 +55,8 @@ test("findLink", () => {
     expect(link).toStrictEqual({
         linkPath: "/123/abc",
         metaData: { whoa: "cool" },
-        sourcePath: "/link/abc/123"
+        sourcePath: "/link/abc/123",
+        createdAt: link.createdAt
     });
 });
 
@@ -65,7 +66,8 @@ test("findLinkWithSource", () => {
     expect(link).toStrictEqual({
         linkPath: "/123/abc",
         metaData: { whoa: "cool" },
-        sourcePath: "/link/abc/123"
+        sourcePath: "/link/abc/123",
+        createdAt: link.createdAt
     });
 });
 
