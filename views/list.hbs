@@ -1,5 +1,4 @@
 <main class="container">
-    <h1>Existing Links</h1>
 
     {{#each seriesList}}
 
@@ -7,9 +6,12 @@
 
             <a
                 href="#collapse{{@index}}"
-                class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom"
+                class="searchable d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom"
                 data-bs-toggle="collapse"
                 role="button"
+                data-search-name="{{@key}}"
+                data-search-link="#collapse-search-{{@index}}"
+                id="collapse-search-{{@index}}"
                 aria-expanded="false"
                 aria-controls="collapse{{@index}}"
             >
@@ -23,10 +25,10 @@
 
                 {{#each this}}
 
-                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                    <a href="/link/" class="list-group-item list-group-item-action py-3 lh-tight">
                         <div class="d-flex w-100 align-items-center justify-content-between">
                             <strong class="mb-1">Source: {{this.linkPath}}</strong>
-                            <small>Wed</small>
+                            <small>{{this.createdAt}}</small>
                         </div>
                         <div class="col-10 mb-1 small">Target:
                             {{this.sourcePath}}<br />

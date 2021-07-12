@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const exphbs = require("express-handlebars");
+const basicAuth = require("express-basic-auth");
 
 const Memory = require("../lib/memory");
 const Config = require("../lib/config");
@@ -11,6 +12,13 @@ class Server {
         this.memory = new Memory(configLocations.storage);
 
         this.app = express();
+        this.app.use(
+            basicAuth({
+                users: { admin: "secure" },
+                challenge: true,
+                realm: "MediaOrganize"
+            })
+        );
     }
 
     getSeriesList() {
@@ -46,11 +54,9 @@ class Server {
         // const seriesList = this.getSeriesList();
 
         this.app.use(
-            express.static(path.join(__dirname, "public"), {
+            express.static(path.join("public"), {
                 dotfiles: "ignore",
-                etag: false,
-                // extensions: ["htm", "html"],
-                index: false
+                etag: false
             })
         );
 
