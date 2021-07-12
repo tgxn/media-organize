@@ -63,11 +63,11 @@ Options:
 
 ### Automatic Methods
 
-Cron (Regular Runs)  
-`orgMedia -c /path/to/config.json -l /path/to/logs/`
+CRON _(Regular Runs)_  
+`orgMedia -c /path/to/config.json -l /path/to/logs`
 
 Watcher/Screen _(creates a screen named `media_watcher` watching your media)_  
-`screen -S media_watcher -dm orgMedia watch -c config.json -l ./logs/`
+`screen -S media_watcher -dm orgMedia watch -c config.json -l ./logs`
 
 ## Configuration
 
@@ -93,11 +93,11 @@ And the following non-mandatory options:
 | `strictType`         | _None_  | Whether this config block should only accept `movies` or `series`         |
 | `allowedSize`        | _None_  | `Array` Minimum and Maximum (if required) file sizes, in MB. `[50, 5000]` |
 
-You can also specify an array of config objects if you have different file types/directories to scan. See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for an example of this.
+You can also specify an array of config objects if you have different file types/directories to scan.
+
+See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for further example configurations.
 
 ##### `targetFormat` configuration
-
-See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for examples.
 
 | Variable        | Value                             | Example       |
 | --------------- | --------------------------------- | ------------- |
