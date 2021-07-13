@@ -14,6 +14,7 @@ A CLI utility for organizing your media collections via symbolic links.
 ✅ File Watcher 👀 links new files  
 ✅ Unlinks ❌ deleted files  
 ✅ Customizable Naming Format  
+✅ Powerful [Nunjucks](https://github.com/mozilla/nunjucks) Templating  
 ✅ Multiple Directory Support  
 ✅ Logging & File Rotation
 
@@ -83,7 +84,6 @@ And the following non-mandatory options:
 | `enabled`            | `true`  |                                                                           |
 | `allowedExtensions`  | `*`     | `Array` Extension to allow, _(empty or omitted for all)_                  |
 | `ignoredExtensions`  | _None_  | `Array` Extensions to ignore                                              |
-| `seriesCaseFormat`   | _None_  | A property of the [Case](https://github.com/nbubna/Case) library          |
 | `linkSubtitles`      | `false` | Should subtitle files be copied alongside media files?                    |
 | `subtitleExtensions` | _None_  | Extensions to link with media                                             |
 | `useHighestQuality`  | `false` | Should a higher-quality release replace a lower one?                      |
@@ -94,14 +94,35 @@ You can also specify an array of config objects if you have different file types
 
 See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for further example configurations.
 
-##### `targetFormat` configuration
+##### `targetFormat` usable variables
 
-| Variable        | Value                                                | Example       |
-| --------------- | ---------------------------------------------------- | ------------- |
-| `{name}`        | Series/Show/Movie Name                               | `Name`        |
-| `{nameOptYear}` | Name followed by year, if defined                    | `Name (2021)` |
-| `{season}`      | Season Integer                                       | `10`          |
-| `{episode}`     | Episode Integer                                      | `34`          |
-| `{year}`        | Year Integer                                         | `2021`        |
-| `{extension}`   | File Extension                                       | `.mkv`        |
-| `{classifier}`  | [Meta] The classifier used to detect the media type. |               |
+This is a list of the basic metadata that should be available on each media item.
+
+| Variable         | Value                                                | Example |
+| ---------------- | ---------------------------------------------------- | ------- |
+| `{{name}}`       | Series/Show/Movie Name                               | `Name`  |
+| `{{season}}`     | Season Integer                                       | `10`    |
+| `{{episode}}`    | Episode Integer                                      | `34`    |
+| `{{year}}`       | Year Integer                                         | `2021`  |
+| `{{extension}}`  | File Extension                                       | `.mkv`  |
+| `{{classifier}}` | [Meta] The classifier used to detect the media type. |         |
+
+#### `caseFormat` filter
+
+This filter will automatically use the [Case](https://github.com/nbubna/Case) library to format a string.
+
+Usage:  
+`{{ name | caseFormat('capital') }}`
+
+Example:  
+`{{ 'foo_v_bar' | caseFormat('capital') }} -> 'Foo V Bar'`
+
+#### `appendYear` filter
+
+This filter will automatically append the year (in brackets) at the end of the given string.
+
+Usage:  
+`{{ name | appendYear }}`
+
+Example:  
+`{{ 'name' | appendYear }} -> 'name (2021)'`
