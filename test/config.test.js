@@ -32,7 +32,7 @@ test("doesn't parse home dir", () => {
 const mockConfigBasic = {
     directories: ["~/test/dir"],
     targetPath: "~/movies",
-    targetFormat: "Movies/{nameOptYear}.{extension}"
+    targetFormat: "Movies/{{nameOptYear}}.{{extension}}"
 };
 
 test("loadAndValidateConfig invalid config data", () => {
@@ -51,13 +51,7 @@ class TaskConfig {
 test("loadAndValidateConfig basic config object", async () => {
     mockFileData = mockConfigBasic;
     const result = await config.loadAndValidateConfig();
-    expect(result).toEqual([
-        new TaskConfig({
-            directories: ["~/test/dir"],
-            targetFormat: "Movies/{nameOptYear}.{extension}",
-            targetPath: "~/movies"
-        })
-    ]);
+    expect(result).toEqual([new TaskConfig(mockConfigBasic)]);
 });
 
 test("loadAndValidateConfig basic config array", () => {

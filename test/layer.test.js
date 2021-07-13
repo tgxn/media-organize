@@ -71,6 +71,35 @@ test("formatSeriesPath", async () => {
     expect(outString).toBe("../sorted/Series/testing (2011)/Season 1/Episode 2.test");
 });
 
+test("formatSeriesPath - normal filter", async () => {
+    const organizeLayer = new OrganizerLayer(
+        {
+            memory: mockedMemory,
+            configArray: [
+                {
+                    ...mockConfigBasic,
+                    targetFormat: "{{name|normal}}/Season {{season}}/Episode {{episode}}.{{extension}}"
+                }
+            ]
+        },
+        0
+    );
+
+    const outString = organizeLayer.formatSeriesPath(
+        {
+            name: `test!@#$%^&*()_{}:\"<>?-|\=+/\`~`,
+            year: 2011,
+            season: 1,
+            episode: 2
+        },
+        {
+            ext: ".test"
+        }
+    );
+
+    expect(outString).toBe("../sorted/Series/test()_-~/Season 1/Episode 2.test");
+});
+
 test("createSymlink", async () => {
     const organizeLayer = new OrganizerLayer(
         {
