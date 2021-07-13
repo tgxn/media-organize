@@ -1,17 +1,14 @@
-const { addConsoleTransport } = require("../lib/logger");
-
 const Organize = require("../lib/organize");
 
-const configLocations = {
-    config: "./config.json",
-    storage: "./data/storage.json"
-};
-
 async function run() {
-    const organizer = new Organize(configLocations);
-    await organizer.loadConfig();
+    const organizer = new Organize();
+    await organizer.loadConfig({
+        dataPathString: "./data",
+        enableFileLogs: true,
+        quietConsole: false
+    });
+
     await organizer.registerWatchers();
 }
 
-addConsoleTransport();
 run();
