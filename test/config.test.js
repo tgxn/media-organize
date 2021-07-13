@@ -18,8 +18,8 @@ jest.mock("fs", () => ({
 
 let config;
 test("parses home dir", () => {
-    config = new Config("~/configFile");
-    expect(config.configPath).toBe(`${homedir}${path.sep}configFile`);
+    config = new Config("/tmp/configFile");
+    expect(config.configPath).toBe(`/tmp/configFile`);
     expect(config.configArray).toStrictEqual([]);
 });
 
