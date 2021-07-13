@@ -6,7 +6,7 @@
         "seriesCaseFormat": "capital",
         "allowedSize": [50, 1500],
         "targetPath": "../sorted/Series",
-        "targetFormat": "{nameOptYear}/Season {season}/Episode {episode}.{extension}"
+        "targetFormat": "{{nameOptYear|caseFormat('lower')}}/Season {{season}}/Episode {{episode}}.{{extension}}"
     },
     {
         "enabled": false,
@@ -18,6 +18,6 @@
         "strictType": "movie",
         "allowedSize": [1200],
         "targetPath": "../sorted/Movies",
-        "targetFormat": "Movies/{nameOptYear}/{name}.{extension}"
+        "targetFormat": "Movies/{{nameOptYear|appendYear|caseFormat(lower)}}/{{name}}.{{extension}}"
     }
 ]

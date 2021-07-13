@@ -14,9 +14,11 @@ A CLI utility for organizing your media collections via symbolic links.
 ✅ File Watcher 👀 links new files  
 ✅ Unlinks ❌ deleted files  
 ✅ Customizable Naming Format  
-✅ Multiple Directory Support
+✅ Powerful [Nunjucks](https://github.com/mozilla/nunjucks) Templating  
+✅ Multiple Directory Support  
+✅ Logging & File Rotation
 
-This plugin will never move your media files, because that's your _(or your torrent client's)_ job!
+This plugin will **never** move or delete your media files, because that's your _(or your torrent client's)_ job!
 
 ## Installation
 
@@ -40,7 +42,11 @@ npm install -g .
 
 ## Usage
 
-```bash
+```
+orgMedia
+
+run media organization
+
 Commands:
   orgMedia run    run media organization                               [default]
   orgMedia watch  start media watchers                              [aliases: w]
@@ -48,20 +54,18 @@ Commands:
 Options:
       --help     Show help                                             [boolean]
       --version  Show version number                                   [boolean]
-  -c, --config   Config file location
-                                   [string] [default: "~/.orgMedia/config.json"]
-  -s, --storage  Storage file location
-                                  [string] [default: "~/.orgMedia/storage.json"]
-  -l, --log      Log file location                              [default: false]
+  -d, --data     app data directory            [string] [default: "~/.orgMedia"]
+  -l, --log      enable logging to data directory      [boolean] [default: true]
+  -q, --quiet    hide console log output              [boolean] [default: false]
 ```
 
 ### Automatic Methods
 
-Cron (Ragular Runs)
-`orgMedia -c /path/to/config -l /path/to/log`
+CRON _(Regular Runs)_  
+`orgMedia`
 
-Watcher (Screen)
-`screen -S media-watcher -d -m orgMedia watch`
+Watcher/Screen _(creates a screen named `media_watcher` watching your media)_  
+`screen -S media_watcher -dm orgMedia watch`
 
 ## Configuration
 
@@ -80,24 +84,54 @@ And the following non-mandatory options:
 | `enabled`            | `true`  |                                                                           |
 | `allowedExtensions`  | `*`     | `Array` Extension to allow, _(empty or omitted for all)_                  |
 | `ignoredExtensions`  | _None_  | `Array` Extensions to ignore                                              |
-| `seriesCaseFormat`   | _None_  | A property of the [Case](https://www.npmjs.com/package/case) library      |
 | `linkSubtitles`      | `false` | Should subtitle files be copied alongside media files?                    |
 | `subtitleExtensions` | _None_  | Extensions to link with media                                             |
 | `useHighestQuality`  | `false` | Should a higher-quality release replace a lower one?                      |
 | `strictType`         | _None_  | Whether this config block should only accept `movies` or `series`         |
 | `allowedSize`        | _None_  | `Array` Minimum and Maximum (if required) file sizes, in MB. `[50, 5000]` |
 
-You can also specify an array of config objects if you have different file types/directories to scan. See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for an example of this.
+You can also specify an array of config objects if you have different file types/directories to scan.
 
-##### `targetFormat` configuration
+See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for further example configurations.
 
-See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/config.example.json) for examples.
+##### `targetFormat` usable variables
 
-| Variable        | Value                             | Example       |
-| --------------- | --------------------------------- | ------------- |
-| `{name}`        | Series/Show/Movie Name            | `Name`        |
-| `{nameOptYear}` | Name followed by year, if defined | `Name (2021)` |
-| `{season}`      | Season Integer                    | `10`          |
-| `{episode}`     | Episode Integer                   | `34`          |
-| `{year}`        | Year Integer                      | `2021`        |
-| `{extension}`   | File Extension                    | `.mkv`        |
+This is a list of the basic metadata that should be available on each media item.
+
+| Variable         | Value                                                | Example |
+| ---------------- | ---------------------------------------------------- | ------- |
+| `{{name}}`       | Series/Show/Movie Name                               | `Name`  |
+| `{{season}}`     | Season Integer                                       | `10`    |
+| `{{episode}}`    | Episode Integer                                      | `34`    |
+| `{{year}}`       | Year Integer                                         | `2021`  |
+| `{{extension}}`  | File Extension                                       | `.mkv`  |
+| `{{classifier}}` | [Meta] The classifier used to detect the media type. |         |
+
+#### `caseFormat` filter
+
+This filter will automatically use the [Case](https://github.com/nbubna/Case) library to format a string.
+
+Usage:  
+`{{ name | caseFormat('capital') }}`
+
+Example:  
+`{{ 'foo_v_bar' | caseFormat('capital') }} -> 'Foo V Bar'`
+
+#### `appendYear` filter
+
+This filter will automatically append the year (in brackets) at the end of the given string.
+
+> Note: Always use `appendYear` **after** `caseFormat` (or other filters that modify the title) so that you don't modify the year.
+
+Usage:  
+`{{ name | appendYear }}`
+
+Example:  
+`{{ 'name' | appendYear }} -> 'name (2021)'`
+
+#### `normal` filter
+
+This filter will automatically strip non-filename-safe characters.
+
+Specifically:
+``#%&{}/\<>^*?$!'":+|@=`

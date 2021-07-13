@@ -18,8 +18,8 @@ jest.mock("fs", () => ({
 
 let config;
 test("parses home dir", () => {
-    config = new Config("~/configFile");
-    expect(config.configPath).toBe(`${homedir}${path.sep}configFile`);
+    config = new Config("/tmp/configFile");
+    expect(config.configPath).toBe(`/tmp/configFile`);
     expect(config.configArray).toStrictEqual([]);
 });
 
@@ -32,21 +32,26 @@ test("doesn't parse home dir", () => {
 const mockConfigBasic = {
     directories: ["~/test/dir"],
     targetPath: "~/movies",
-    targetFormat: "Movies/{nameOptYear}.{extension}"
+    targetFormat: "Movies/{{nameOptYear}}.{{extension}}"
 };
 
 test("loadAndValidateConfig invalid config data", () => {
     mockFileData = {};
     return config.loadAndValidateConfig().catch((errors) => {
-        expect(errors[0].toString()).toBe(`instance[0] requires property "directories"`);
+        expect(errors[0].stack).toEqual(`instance requires property "directories"`);
     });
 });
 
-test("loadAndValidateConfig basic config object", () => {
+class TaskConfig {
+    constructor(configData) {
+        this.configData = configData;
+    }
+}
+
+test("loadAndValidateConfig basic config object", async () => {
     mockFileData = mockConfigBasic;
-    return config.loadAndValidateConfig().then((result) => {
-        expect(result).toStrictEqual([mockConfigBasic]);
-    });
+    const result = await config.loadAndValidateConfig();
+    expect(result).toEqual([new TaskConfig(mockConfigBasic)]);
 });
 
 test("loadAndValidateConfig basic config array", () => {
@@ -58,12 +63,12 @@ test("loadAndValidateConfig basic config array", () => {
         }
     ];
     return config.loadAndValidateConfig().then((result) => {
-        expect(result).toStrictEqual([
-            mockConfigBasic,
-            {
+        expect(result).toEqual([
+            new TaskConfig(mockConfigBasic),
+            new TaskConfig({
                 ...mockConfigBasic,
                 enabled: false
-            }
+            })
         ]);
     });
 });

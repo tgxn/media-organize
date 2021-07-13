@@ -2,11 +2,6 @@ const Organize = require("../lib/organize");
 
 const configArray = require("../config.example.json");
 
-const configLocations = {
-    config: "./config.json",
-    storage: "./data/storage.json"
-};
-
 let mockFileData = configArray;
 jest.mock("fs", () => ({
     promises: {
@@ -25,8 +20,16 @@ jest.mock("fs", () => ({
 
 let organize;
 test("new Organize & loadConfig", async () => {
-    organize = new Organize(configLocations);
-    await organize.loadConfig();
+    organize = new Organize();
+    await organize.loadConfig({
+        dataPathString: "/tmp",
+        enableFileLogs: false,
+        quietConsole: false
+    });
+
+    expect(organize.dataLocations.config).toBe("/tmp/config.json");
+    expect(organize.dataLocations.storage).toBe(`/tmp/storage.json`);
+    expect(organize.dataLocations.logsDir).toBe(`/tmp/logs/`);
 });
 
 test("organizeAll", async () => {
