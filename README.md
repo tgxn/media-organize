@@ -121,8 +121,17 @@ Example:
 
 This filter will automatically append the year (in brackets) at the end of the given string.
 
+> Note: Always use `appendYear` **after** `caseFormat` (or other filters that modify the title) so that you don't modify the year.
+
 Usage:  
 `{{ name | appendYear }}`
 
 Example:  
 `{{ 'name' | appendYear }} -> 'name (2021)'`
+
+#### `normal` filter
+
+This filter will automatically strip non-filename-safe characters.
+
+Specifically:
+``#%&{}/\<>^*?$!'":+|@=`
