@@ -38,7 +38,8 @@ test("determineMediaInfo - series", async () => {
         quality: 1080,
         season: 1,
         source: "webdl",
-        year: 2021
+        year: 2021,
+        classifier: "episode-parser"
     });
 });
 
@@ -55,7 +56,8 @@ test("determineMediaInfo - anime", async () => {
         quality: "1080p",
         season: "00",
         source: undefined,
-        year: null
+        year: null,
+        classifier: "anitomy-js"
     });
 });
 
@@ -75,6 +77,7 @@ test("determineMediaInfo - movie", async () => {
         quality: "1080p",
         season: null,
         source: null,
-        year: 2005
+        year: 2005,
+        classifier: "parse-torrent-name"
     });
 });
