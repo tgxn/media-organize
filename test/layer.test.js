@@ -11,7 +11,7 @@ const mockConfigBasic = {
     directories: ["~/test/dir"],
     allowedExtensions: ["mkv"],
     targetPath: "../sorted/Series",
-    targetFormat: "{nameOptYear}/Season {season}/Episode {episode}.{extension}"
+    targetFormat: "{{name|appendYear}}/Season {{season}}/Episode {{episode}}.{{extension}}"
 };
 
 jest.mock("fs", () => ({
