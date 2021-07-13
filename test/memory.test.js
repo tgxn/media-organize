@@ -21,10 +21,10 @@ jest.mock("../lib/storage", () => {
 
 let memory;
 test("parses home dir storeFile", () => {
-    memory = new Memory("~/storeFile");
+    memory = new Memory("/tmp/storeFile");
 
     return memory.loadStore().then(() => {
-        expect(memory.storageFileLocation).toBe(`${homedir}${path.sep}storeFile`);
+        expect(memory.storageFileLocation).toBe(`/tmp/storeFile`);
         expect(memory.linkFiles).toStrictEqual({});
     });
 });
