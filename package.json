@@ -17,6 +17,7 @@
         "test": "jest --collectCoverage",
         "start": "node ./bin/run.js",
         "watch": "nodemon ./bin/watch.js",
+        "serve": "nodemon ./bin/serve.js",
         "prettier": "prettier --ignore-path .gitignore -c ./",
         "format": "prettier --ignore-path .gitignore -w ./"
     },
@@ -33,6 +34,8 @@
         "case": "^1.6.3",
         "chalk": "^4.1.1",
         "episode-parser": "^2.0.2",
+        "express": "^4.17.1",
+        "express-handlebars": "^5.3.2",
         "hound": "^1.0.5",
         "jsonschema": "^1.4.0",
         "parse-torrent-name": "^0.5.4",
