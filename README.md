@@ -15,9 +15,9 @@ A CLI utility for organizing your media collections via symbolic links.
 ✅ Unlinks ❌ deleted files  
 ✅ Customizable Naming Format  
 ✅ Multiple Directory Support  
-✅ Logging with rotation
+✅ Logging & File Rotation
 
-This plugin will never move your media files, because that's your _(or your torrent client's)_ job!
+This plugin will **never** move or delete your media files, because that's your _(or your torrent client's)_ job!
 
 ## Installation
 
@@ -53,21 +53,18 @@ Commands:
 Options:
       --help     Show help                                             [boolean]
       --version  Show version number                                   [boolean]
-  -c, --config   config.json file location
-                                   [string] [default: "~/.orgMedia/config.json"]
-  -s, --storage  storage.json file location
-                                  [string] [default: "~/.orgMedia/storage.json"]
-  -l, --log      log directory path                             [default: false]
+  -d, --data     app data directory            [string] [default: "~/.orgMedia"]
+  -l, --log      enable logging to data directory      [boolean] [default: true]
   -q, --quiet    hide console log output              [boolean] [default: false]
 ```
 
 ### Automatic Methods
 
 CRON _(Regular Runs)_  
-`orgMedia -c /path/to/config.json -l /path/to/logs`
+`orgMedia`
 
 Watcher/Screen _(creates a screen named `media_watcher` watching your media)_  
-`screen -S media_watcher -dm orgMedia watch -c config.json -l ./logs`
+`screen -S media_watcher -dm orgMedia watch`
 
 ## Configuration
 
@@ -99,11 +96,12 @@ See [`config.example.json`](https://github.com/tgxn/media-organize/blob/master/c
 
 ##### `targetFormat` configuration
 
-| Variable        | Value                             | Example       |
-| --------------- | --------------------------------- | ------------- |
-| `{name}`        | Series/Show/Movie Name            | `Name`        |
-| `{nameOptYear}` | Name followed by year, if defined | `Name (2021)` |
-| `{season}`      | Season Integer                    | `10`          |
-| `{episode}`     | Episode Integer                   | `34`          |
-| `{year}`        | Year Integer                      | `2021`        |
-| `{extension}`   | File Extension                    | `.mkv`        |
+| Variable        | Value                                                | Example       |
+| --------------- | ---------------------------------------------------- | ------------- |
+| `{name}`        | Series/Show/Movie Name                               | `Name`        |
+| `{nameOptYear}` | Name followed by year, if defined                    | `Name (2021)` |
+| `{season}`      | Season Integer                                       | `10`          |
+| `{episode}`     | Episode Integer                                      | `34`          |
+| `{year}`        | Year Integer                                         | `2021`        |
+| `{extension}`   | File Extension                                       | `.mkv`        |
+| `{classifier}`  | [Meta] The classifier used to detect the media type. |               |
