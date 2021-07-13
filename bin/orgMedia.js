@@ -1,30 +1,22 @@
 #!/usr/bin/env node
 
-const logger = require("../lib/logger");
-const { addConsoleTransport, addFileTransport } = require("../lib/logger");
-
 const Organize = require("../lib/organize");
 
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 
 yargs(hideBin(process.argv))
-    .option("c", {
-        alias: "config",
-        default: "~/.orgMedia/config.json",
-        describe: "config.json file location",
-        type: "string"
-    })
-    .option("s", {
-        alias: "storage",
-        default: "~/.orgMedia/storage.json",
-        describe: "storage.json file location",
+    .option("d", {
+        alias: "data",
+        default: "~/.orgMedia",
+        describe: "app data directory",
         type: "string"
     })
     .option("l", {
         alias: "log",
-        default: false,
-        describe: "log directory path"
+        type: "boolean",
+        default: true,
+        describe: "enable logging to data directory"
     })
     .option("q", {
         alias: "quiet",
@@ -45,32 +37,24 @@ yargs(hideBin(process.argv))
         handler: watch
     }).argv;
 
-function getConfigFromArgv(argv) {
-    const configLocations = {
-        config: argv.config,
-        storage: argv.storage
-    };
-
-    addConsoleTransport({
-        level: argv.quiet ? "error" : "info"
+async function run(argv) {
+    const organizer = new Organize();
+    await organizer.loadConfig({
+        dataPathString: argv.data,
+        enableFileLogs: argv.log,
+        quietConsole: argv.quiet
     });
 
-    if (argv.log) {
-        addFileTransport(argv.log);
-    }
-
-    logger.info("data file paths", configLocations);
-    return configLocations;
-}
-
-async function run(argv) {
-    const organizer = new Organize(getConfigFromArgv(argv));
-    await organizer.loadConfig();
     await organizer.organizeAll();
 }
 
 async function watch(argv) {
-    const organizer = new Organize(getConfigFromArgv(argv));
-    await organizer.loadConfig();
+    const organizer = new Organize();
+    await organizer.loadConfig({
+        dataPathString: argv.data,
+        enableFileLogs: argv.log,
+        quietConsole: argv.quiet
+    });
+
     await organizer.registerWatchers();
 }
