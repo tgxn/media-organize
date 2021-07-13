@@ -35,9 +35,9 @@
         "episode-parser": "^2.0.2",
         "hound": "^1.0.5",
         "jsonschema": "^1.4.0",
+        "nunjucks": "^3.2.3",
         "parse-torrent-name": "^0.5.4",
         "queue-promise": "^2.2.1",
-        "string-template": "^1.0.0",
         "winston": "^3.3.3",
         "winston-daily-rotate-file": "^4.5.5",
         "yargs": "^17.0.1"
