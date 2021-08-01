@@ -16,6 +16,7 @@
     "scripts": {
         "test": "jest --collectCoverage",
         "start": "node ./bin/run.js",
+        "clean": "node ./bin/clean.js",
         "watch": "nodemon ./bin/watch.js",
         "prettier": "prettier --ignore-path .gitignore -c ./",
         "format": "prettier --ignore-path .gitignore -w ./"
