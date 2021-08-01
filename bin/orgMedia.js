@@ -35,6 +35,11 @@ yargs(hideBin(process.argv))
         aliases: ["w"],
         desc: "start media watchers",
         handler: watch
+    })
+    .command({
+        command: "clean",
+        desc: "check for broken links",
+        handler: clean
     }).argv;
 
 async function run(argv) {
@@ -57,4 +62,15 @@ async function watch(argv) {
     });
 
     await organizer.registerWatchers();
+}
+
+async function clean(argv) {
+    const organizer = new Organize();
+    await organizer.loadConfig({
+        dataPathString: argv.data,
+        enableFileLogs: argv.log,
+        quietConsole: argv.quiet
+    });
+
+    await organizer.validateLinkTargets();
 }
