@@ -1,3 +1,4 @@
 /node_modules/
 /coverage/
 /data/
+docker-compose.override.yaml
