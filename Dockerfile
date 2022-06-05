@@ -9,9 +9,10 @@ COPY package*.json ./
 RUN npm install -g npm@latest
 RUN npm install
 
-COPY --chown=node:node . .
 USER node
 VOLUME /app/data
-EXPOSE 3000
 
+COPY --chown=node:node . .
+
+EXPOSE 3000
 CMD [ "npm", "run", "watch" ]
