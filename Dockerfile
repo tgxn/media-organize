@@ -20,5 +20,5 @@ RUN npm install
 RUN npm run build
 
 WORKDIR /app
-EXPOSE 3000
+EXPOSE 3500
 CMD [ "npm", "run", "serve" ]
