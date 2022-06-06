@@ -13,6 +13,9 @@ const theme = createTheme({
     //         main: red.A400
     //     }
     // }
+    palette: {
+        mode: 'dark',
+    },
 });
 
 export default theme;

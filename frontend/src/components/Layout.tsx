@@ -35,7 +35,6 @@ const Layout: React.FC<Props> = ({ children }) => {
                 <Header />
                 <Toolbar />
                 <Box className={classes.container}>
-                    
                     <Box className={classes.main}>{children}</Box>
                 </Box>
             </Box >

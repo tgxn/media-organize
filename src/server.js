@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 
 const basicAuth = require("express-basic-auth");
+const compression = require("compression");
 
 const Memory = require("../src/memory");
 const Config = require("../src/config");
@@ -19,6 +20,7 @@ class Server {
                 realm: "MediaOrganize"
             })
         );
+        this.app.use(compression());
     }
 
     getSeriesList() {

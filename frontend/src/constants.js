@@ -2,10 +2,10 @@ export const ROUTES = {
     series: "/series"
 };
 
-export const NAVIGATION_ITEMS = [
+export const NAV_ITEMS = [
     {
-        route: ROUTES.series,
-        literal: "Series",
-        Icon: "dashboard"
+        name: "Series",
+        icon: "dashboard",
+        route: ROUTES.series
     }
 ];
