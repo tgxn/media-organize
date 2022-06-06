@@ -1,5 +1,6 @@
 export const ROUTES = {
-    series: "/series"
+    series: "/series",
+    links: "/links"
 };
 
 export const NAV_ITEMS = [
@@ -7,5 +8,10 @@ export const NAV_ITEMS = [
         name: "Series",
         icon: "dashboard",
         route: ROUTES.series
+    },
+    {
+        name: "Links",
+        icon: "dashboard",
+        route: ROUTES.links
     }
 ];

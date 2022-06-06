@@ -11,6 +11,12 @@ const MediaClient = axios.create({
     }
 });
 
+export const getPath = async (apiPath) => {
+    const resp = await MediaClient.get(apiPath);
+    console.log(resp);
+    return resp;
+};
+
 export const getSeries = async () => {
     const resp = await MediaClient.get("series");
 

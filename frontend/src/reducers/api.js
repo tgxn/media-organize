@@ -1,7 +1,8 @@
-import { getSeries } from "../lib/api";
+import { getSeries, getPath } from "../lib/api";
 
 export const ACTIONS = {
-    FETCH_SERIES: "FETCH_SERIES"
+    FETCH_SERIES: "FETCH_SERIES",
+    FETCH_LINKS: "FETCH_LINKS"
 };
 
 export const fetchSeries = () => async (dispatch) => {
@@ -17,8 +18,22 @@ export const fetchSeries = () => async (dispatch) => {
     }
 };
 
+export const fetchLinks = () => async (dispatch) => {
+    try {
+        const res = await getPath("links");
+
+        dispatch({
+            type: ACTIONS.FETCH_LINKS,
+            payload: res.data
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 const initialState = {
-    series: null
+    series: null,
+    links: null
 };
 
 const apiReducer = (state = initialState, action) => {
@@ -30,6 +45,12 @@ const apiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 series: payload
+            };
+        case ACTIONS.FETCH_LINKS:
+            console.log("FETCH_LINKS", payload);
+            return {
+                ...state,
+                links: payload
             };
 
         default:
