@@ -1,4 +1,4 @@
-const Organize = require("../lib/organize");
+const Organize = require("../src/organize");
 
 async function run() {
     const organizer = new Organize();

@@ -1,11 +1,11 @@
 const path = require("path");
 const { homedir } = require("os");
 
-const Memory = require("../lib/memory");
+const Memory = require("../src/memory");
 
 // setup mocks
 let storeObject = {};
-jest.mock("../lib/storage", () => {
+jest.mock("../src/storage", () => {
     return jest.fn().mockImplementation(() => {
         return {
             load: jest.fn().mockResolvedValue(),

@@ -1,4 +1,4 @@
-const OrganizerLayer = require("../lib/layer");
+const OrganizerLayer = require("../src/layer");
 
 const mockedMemory = {
     findLinkWithSource: () => {},

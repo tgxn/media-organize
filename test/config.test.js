@@ -1,7 +1,7 @@
 const path = require("path");
 const { homedir } = require("os");
 
-const Config = require("../lib/config");
+const Config = require("../src/config");
 
 // setup mocks
 let mockFileData;

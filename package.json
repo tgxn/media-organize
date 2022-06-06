@@ -25,7 +25,7 @@
         "orgMedia": "./bin/orgMedia.js"
     },
     "files": [
-        "lib/",
+        "src/",
         "bin/"
     ],
     "license": "MIT",

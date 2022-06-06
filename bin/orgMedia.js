@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Organize = require("../lib/organize");
+const Organize = require("../src/organize");
 
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");

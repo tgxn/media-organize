@@ -1,6 +1,6 @@
 const path = require("path");
 
-const Parser = require("../lib/parser");
+const Parser = require("../src/parser");
 
 test("isMovieOrSeries", async () => {
     let testResult;

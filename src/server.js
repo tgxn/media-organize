@@ -1,10 +1,10 @@
 const path = require("path");
 const express = require("express");
-const exphbs = require("express-handlebars");
+
 const basicAuth = require("express-basic-auth");
 
-const Memory = require("../lib/memory");
-const Config = require("../lib/config");
+const Memory = require("../src/memory");
+const Config = require("../src/config");
 
 class Server {
     constructor(configLocations) {
@@ -51,8 +51,6 @@ class Server {
             console.error("Error loading storage", error);
         }
 
-        // const seriesList = this.getSeriesList();
-
         this.app.use(
             express.static(path.join("public"), {
                 dotfiles: "ignore",
@@ -60,27 +58,14 @@ class Server {
             })
         );
 
-        this.hbs = exphbs.create({
-            helpers: {
-                json: function (context) {
-                    return JSON.stringify(context, null, 4);
-                }
-            },
-            extname: ".hbs"
-        });
-
-        this.app.engine("hbs", this.hbs.engine);
-        this.app.set("view engine", "hbs");
+        // const seriesList = this.getSeriesList();
 
         this.app.get("/", (req, res, next) => {
-            res.render("list", {
-                fileLinks: this.memory.linkFiles,
-                seriesList: this.getSeriesList()
-            });
+            res.send("Received a GET HTTP method");
         });
 
         this.app.get("/:linkPath", function (req, res, next) {
-            res.render("link", {});
+            res.send("Received a GET HTTP method");
         });
 
         this.app.listen(3500);
