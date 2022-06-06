@@ -19,7 +19,7 @@ class Server {
             basicAuth({
                 users: { admin: "secure" },
                 challenge: true,
-                realm: "MediaOrganize"
+                realm: "MediaOrganize",
             })
         );
         this.app.use(compression());
@@ -56,9 +56,9 @@ class Server {
         }
 
         this.app.use(
-            express.static(path.join("public"), {
+            express.static(path.join("frontend/build"), {
                 dotfiles: "ignore",
-                etag: false
+                etag: false,
             })
         );
 
