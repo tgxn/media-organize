@@ -2,7 +2,7 @@ import { getSeries, getPath } from "../lib/api";
 
 export const ACTIONS = {
     FETCH_SERIES: "FETCH_SERIES",
-    FETCH_LINKS: "FETCH_LINKS"
+    FETCH_LINKS: "FETCH_LINKS",
 };
 
 export const fetchSeries = () => async (dispatch) => {
@@ -11,7 +11,7 @@ export const fetchSeries = () => async (dispatch) => {
 
         dispatch({
             type: ACTIONS.FETCH_SERIES,
-            payload: res.data
+            payload: res.data,
         });
     } catch (err) {
         console.log(err);
@@ -24,7 +24,7 @@ export const fetchLinks = () => async (dispatch) => {
 
         dispatch({
             type: ACTIONS.FETCH_LINKS,
-            payload: res.data
+            payload: res.data,
         });
     } catch (err) {
         console.log(err);
@@ -33,7 +33,7 @@ export const fetchLinks = () => async (dispatch) => {
 
 const initialState = {
     series: null,
-    links: null
+    links: null,
 };
 
 const apiReducer = (state = initialState, action) => {
@@ -44,13 +44,13 @@ const apiReducer = (state = initialState, action) => {
             console.log("FETCH_SERIES", payload);
             return {
                 ...state,
-                series: payload
+                series: payload,
             };
         case ACTIONS.FETCH_LINKS:
             console.log("FETCH_LINKS", payload);
             return {
                 ...state,
-                links: payload
+                links: payload,
             };
 
         default:

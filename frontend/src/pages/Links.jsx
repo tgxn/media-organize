@@ -25,11 +25,11 @@ class Links extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    linksData: state.apiReducer.links
+    linksData: state.apiReducer.links,
 });
 
 const mapDispatchToProps = {
-    fetchLinks
+    fetchLinks,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Links);

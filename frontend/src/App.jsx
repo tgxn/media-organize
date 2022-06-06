@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { ROUTES } from "./constants";
+import { ROUTES } from "./const";
 
 import Series from "./pages/Series";
 import Links from "./pages/Links";

@@ -1,44 +1,42 @@
 import { ReactNode } from "react";
 
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from "tss-react/mui";
 
 import Header from "./Header";
 import Toolbar from "@mui/material/Toolbar";
-import Box  from "@mui/material/Box";
+import Box from "@mui/material/Box";
 
 const useStyles = makeStyles()((theme) => ({
     root: {
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh"
+        minHeight: "100vh",
     },
     container: {
         display: "flex",
-        flex: 1
+        flex: 1,
     },
     main: {
-        flex: 1
-    }
+        flex: 1,
+    },
 }));
 
 type Props = {
-    children: NonNullable<ReactNode>
+    children: NonNullable<ReactNode>;
 };
 
 const Layout: React.FC<Props> = ({ children }) => {
     const { classes } = useStyles();
-    
-    return (
-        
-            <Box className={classes.root}>
-                <Header />
-                <Box className={classes.container}>
-                    <Toolbar />
-                    <Box className={classes.main}>{children}</Box>
-                </Box>
-            </Box >
 
+    return (
+        <Box className={classes.root}>
+            <Header />
+            <Box className={classes.container}>
+                <Toolbar />
+                <Box className={classes.main}>{children}</Box>
+            </Box>
+        </Box>
     );
 };
 

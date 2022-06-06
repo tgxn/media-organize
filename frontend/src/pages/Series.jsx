@@ -41,11 +41,11 @@ class Series extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    seriesData: state.apiReducer.series
+    seriesData: state.apiReducer.series,
 });
 
 const mapDispatchToProps = {
-    fetchSeries
+    fetchSeries,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Series);

@@ -36,7 +36,7 @@ function StyledTreeItem(props) {
             }
             style={{
                 "--tree-view-color": color,
-                "--tree-view-bg-color": bgColor
+                "--tree-view-bg-color": bgColor,
             }}
             {...other}
         />
@@ -48,7 +48,7 @@ StyledTreeItem.propTypes = {
     color: PropTypes.string,
     labelIcon: PropTypes.elementType.isRequired,
     labelInfo: PropTypes.string,
-    labelText: PropTypes.string.isRequired
+    labelText: PropTypes.string.isRequired,
 };
 
 export default function SeriesTreeView() {
