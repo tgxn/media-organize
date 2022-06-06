@@ -58,14 +58,22 @@ class Server {
             })
         );
 
-        // const seriesList = this.getSeriesList();
-
-        this.app.get("/", (req, res, next) => {
-            res.send("Received a GET HTTP method");
+        this.app.get("/config", async (req, res, next) => {
+            const configArray = await this.config.loadAndValidateConfig();
+            return res.json(configArray);
         });
 
-        this.app.get("/:linkPath", function (req, res, next) {
-            res.send("Received a GET HTTP method");
+        this.app.get("/series", async (req, res, next) => {
+            const seriesList = this.getSeriesList();
+            return res.json(seriesList);
+        });
+
+        this.app.get("/links", async (req, res, next) => {
+            return res.json(this.memory.linkFiles);
+        });
+
+        this.app.get("/:linkPath", async (req, res, next) => {
+            return res.send("Received a GET HTTP method");
         });
 
         this.app.listen(3500);

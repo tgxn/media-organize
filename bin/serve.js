@@ -1,7 +1,7 @@
 const Server = require("../src/server");
 
 const configLocations = {
-    config: "./config.json",
+    config: "./data/config.json",
     storage: "./data/storage.json"
 };
 
