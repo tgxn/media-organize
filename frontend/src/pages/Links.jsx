@@ -10,7 +10,7 @@ import { fetchLinks } from "../reducers/api";
 
 class Links extends Component {
     componentDidMount() {
-        this.props.fetchLinks();
+        if (!this.props.linksData) this.props.fetchLinks();
     }
 
     render() {
@@ -18,14 +18,14 @@ class Links extends Component {
             <Layout>
                 <Toolbar />
                 <Drawer />
-                <pre>{JSON.stringify(this.props.seriesData, null, 4) || "false"}</pre>
+                <pre>{JSON.stringify(this.props.linksData, null, 4) || "false"}</pre>
             </Layout>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    seriesData: state.apiReducer.links
+    linksData: state.apiReducer.links
 });
 
 const mapDispatchToProps = {
