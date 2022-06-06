@@ -5,13 +5,19 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Chip from "@mui/material/Chip";
 
 import InboxIcon from "@mui/icons-material/Inbox";
 
 function SeriesTreeView(props: any) {
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = React.useState(-1);
 
-    const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+    const handleListItemClick = (
+        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        index: number,
+        series: string
+    ) => {
+        props.onChange(series);
         setSelectedIndex(index);
     };
 
@@ -21,10 +27,11 @@ function SeriesTreeView(props: any) {
                 Object.keys(props.seriesData).map((series, index) => {
                     return (
                         <ListItemButton
+                            key={index}
                             selected={selectedIndex === index}
-                            onClick={(event) => handleListItemClick(event, index)}>
+                            onClick={(event) => handleListItemClick(event, index, series)}>
                             <ListItemIcon>
-                                <InboxIcon />
+                                <Chip size="small" label={props.seriesData[series].length} />
                             </ListItemIcon>
                             <ListItemText primary={series} />
                         </ListItemButton>
