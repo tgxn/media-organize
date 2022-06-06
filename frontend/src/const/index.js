@@ -1,3 +1,5 @@
+import { Dvr, Link } from "@mui/icons-material";
+
 import store from "./store";
 import theme from "./theme";
 
@@ -9,12 +11,12 @@ const ROUTES = {
 const NAV_ITEMS = [
     {
         name: "Series",
-        icon: "dashboard",
+        icon: <Dvr />,
         route: ROUTES.series,
     },
     {
         name: "Links",
-        icon: "dashboard",
+        icon: <Link />,
         route: ROUTES.links,
     },
 ];

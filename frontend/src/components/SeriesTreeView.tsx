@@ -19,7 +19,6 @@ function SeriesTreeView(props: any) {
         <List component="nav" aria-label="main mailbox folders">
             {props.seriesData &&
                 Object.keys(props.seriesData).map((series, index) => {
-                    // console.log(series, index, this.props.seriesData[series]);
                     return (
                         <ListItemButton
                             selected={selectedIndex === index}
