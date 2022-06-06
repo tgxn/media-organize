@@ -15,21 +15,10 @@ const Layout: React.FC<Props> = ({ children, loading }) => {
     return (
         <Box>
             <Header loading={loading} />
-            {!loading && (
-                <Box>
-                    <Toolbar />
-                    <Box>{children}</Box>
-                </Box>
-            )}
-
-            {loading && (
-                <Box>
-                    <Toolbar />
-                    <Box>
-                        <LinearProgress />
-                    </Box>
-                </Box>
-            )}
+            <Box>
+                <Toolbar />
+                <Box>{!loading ? children : <LinearProgress />}</Box>
+            </Box>
         </Box>
     );
 };
