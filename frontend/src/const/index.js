@@ -6,6 +6,7 @@ import theme from "./theme";
 const ROUTES = {
     series: "/series",
     links: "/links",
+    actions: "/actions",
 };
 
 const NAV_ITEMS = [
@@ -18,6 +19,11 @@ const NAV_ITEMS = [
         name: "Links",
         icon: <Link />,
         route: ROUTES.links,
+    },
+    {
+        name: "Actions",
+        icon: <Link />,
+        route: ROUTES.actions,
     },
 ];
 

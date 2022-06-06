@@ -1,6 +1,8 @@
 const path = require("path");
 const express = require("express");
 
+const { Worker, isMainThread, parentPort, workerData } = require("worker_threads");
+
 const cors = require("cors");
 const basicAuth = require("express-basic-auth");
 const compression = require("compression");
@@ -23,6 +25,18 @@ class Server {
             })
         );
         this.app.use(compression());
+    }
+
+    async startWorker(workerTask, workerData, onMessage) {
+        return new Promise((resolve, reject) => {
+            const worker = new Worker(`./src/tasks/${workerTask}.js`, { workerData });
+            worker.on("message", onMessage);
+            worker.on("error", reject);
+            worker.on("exit", (code) => {
+                if (code === 0) resolve(code);
+                if (code !== 0) reject(new Error(`stopped with  ${code} exit code`));
+            });
+        });
     }
 
     getSeriesList() {
@@ -65,6 +79,14 @@ class Server {
         this.app.get("/config", async (req, res, next) => {
             const configArray = await this.config.loadAndValidateConfig();
             return res.json(configArray);
+        });
+
+        this.app.get("/organize", async (req, res, next) => {
+            const resuolt = await this.startWorker("organizeAll", { name: "test" }, (message) => {
+                res.write(JSON.stringify(message) + "\n");
+            });
+            res.write(JSON.stringify(resuolt));
+            return res.end();
         });
 
         this.app.get("/series", async (req, res, next) => {

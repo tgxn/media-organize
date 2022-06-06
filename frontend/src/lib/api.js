@@ -24,3 +24,9 @@ export const getSeries = async () => {
 
     return resp;
 };
+
+export const getPathStream = async (apiPath) => {
+    const resp = await MediaClient({ url: apiPath, responseType: "stream" });
+
+    return resp;
+};
