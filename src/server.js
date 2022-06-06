@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 
+const cors = require("cors");
 const basicAuth = require("express-basic-auth");
 const compression = require("compression");
 
@@ -13,6 +14,7 @@ class Server {
         this.memory = new Memory(configLocations.storage);
 
         this.app = express();
+        this.app.use(cors());
         this.app.use(
             basicAuth({
                 users: { admin: "secure" },
