@@ -87,6 +87,7 @@ And the following non-mandatory options:
 | `linkSubtitles`      | `false` | Should subtitle files be copied alongside media files?                    |
 | `subtitleExtensions` | _None_  | Extensions to link with media                                             |
 | `useHighestQuality`  | `false` | Should a higher-quality release replace a lower one?                      |
+| `useHardLinks`       | `false` | If we should create hard links instead of symlinks.                       |
 | `strictType`         | _None_  | Whether this config block should only accept `movies` or `series`         |
 | `allowedSize`        | _None_  | `Array` Minimum and Maximum (if required) file sizes, in MB. `[50, 5000]` |
 
