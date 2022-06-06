@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import Layout from "../components/Layout";
 import Drawer from "../components/Drawer";
 
+import SeriesTreeView from "../components/SeriesTreeView";
+
 import { fetchSeries } from "../reducers/api";
 
 class Series extends Component {
@@ -31,10 +33,8 @@ class Series extends Component {
         return (
             <Layout>
                 <Toolbar />
-                <Drawer />
-                <pre>{this.props.seriesData != null ? "true" : "false"}</pre>
-
-                <Box sx={{ p: 3 }}>{this.props.seriesData != null && this.seriesList()}</Box>
+                <Drawer element={<SeriesTreeView />} />
+                <pre>{this.props.seriesData != null ? "loaded" : "loading..."}</pre>
             </Layout>
         );
     }

@@ -33,8 +33,8 @@ const Layout: React.FC<Props> = ({ children }) => {
         
             <Box className={classes.root}>
                 <Header />
-                <Toolbar />
                 <Box className={classes.container}>
+                    <Toolbar />
                     <Box className={classes.main}>{children}</Box>
                 </Box>
             </Box >
