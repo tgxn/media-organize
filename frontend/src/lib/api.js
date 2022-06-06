@@ -1,11 +1,13 @@
 import axios from "axios";
 import { Buffer } from "buffer";
 
+import { getBackendURL, getBackendAuth } from "../config";
+
 const MediaClient = axios.create({
-    baseURL: "http://localhost:3500/",
+    baseURL: getBackendURL(),
     timeout: 15000,
     headers: {
-        Authorization: "Basic " + Buffer.from("admin:secure").toString("base64")
+        Authorization: "Basic " + Buffer.from(getBackendAuth()).toString("base64")
     }
 });
 
