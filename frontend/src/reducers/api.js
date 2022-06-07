@@ -1,4 +1,5 @@
-import { getSeries, getPath, getPathStream } from "../lib/api";
+import { getSeries, getPath } from "../lib/api";
+import { getSocket } from "../lib/socket";
 
 export const ACTIONS = {
     FETCH_SERIES: "FETCH_SERIES",
@@ -40,27 +41,25 @@ export const organizeAll = () => async (dispatch) => {
             type: ACTIONS.ORGANIZE_STATUS,
             payload: "started",
         });
-        const response = await getPathStream("organize");
-        console.log("response", response);
-        const stream = response.data;
 
-        stream.on("data", (data) => {
-            data = data.toString();
-            console.log(data);
-            dispatch({
-                type: ACTIONS.ORGANIZE_DATA,
-                payload: data,
-            });
-        });
+        const socket = getSocket();
 
-        stream.on("data", (data) => {
-            data = data.toString();
-            console.log(data);
-            dispatch({
-                type: ACTIONS.ORGANIZE_STATUS,
-                payload: "complete",
-            });
-        });
+        socket.onmessage = function message(event) {
+            var message = JSON.parse(event.data);
+
+            switch (message.type) {
+                case "pong":
+                    console.info(`Round-trip time: ${Date.now() - message.time} ms`);
+                    break;
+                case "organizeStatus":
+                    dispatch({
+                        type: ACTIONS.ORGANIZE_STATUS,
+                        payload: {
+                            status: message.status,
+                        },
+                    });
+            }
+        };
     } catch (err) {
         console.log(err);
     }

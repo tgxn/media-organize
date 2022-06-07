@@ -42,9 +42,11 @@
         "jsonschema": "^1.4.1",
         "parse-torrent-name": "^0.5.4",
         "queue-promise": "^2.2.1",
+        "socket.io": "^4.5.1",
         "string-template": "^1.0.0",
         "winston": "^3.7.2",
         "winston-daily-rotate-file": "^4.7.1",
+        "ws": "^8.7.0",
         "yargs": "^17.5.1"
     },
     "devDependencies": {
