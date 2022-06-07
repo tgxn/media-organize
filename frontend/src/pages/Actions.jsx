@@ -26,6 +26,7 @@ class Series extends Component {
 
 const mapStateToProps = (state) => ({
     organizeState: state.apiReducer.organizeState,
+    wssRTT: state.apiReducer.wssRTT,
 });
 
 const mapDispatchToProps = {

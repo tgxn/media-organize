@@ -4,7 +4,7 @@ async function run() {
     parentPort.postMessage({ state: "start" });
     console.log(isMainThread, workerData);
 
-    // const Organize = require("../organize");
+    const Organize = require("../organize");
 
     // const organizer = new Organize();
     // await organizer.loadConfig({

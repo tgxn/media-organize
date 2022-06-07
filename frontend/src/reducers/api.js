@@ -6,6 +6,7 @@ export const ACTIONS = {
     FETCH_LINKS: "FETCH_LINKS",
 
     ORGANIZE_STATE: "ORGANIZE_STATE",
+    WSS_RTT: "WSS_RTT",
 };
 
 export const fetchSeries = () => async (dispatch) => {
@@ -51,9 +52,12 @@ export const organizeAll = () => async (dispatch) => {
             switch (message.type) {
                 case "pong":
                     console.info(`Round-trip time: ${Date.now() - message.time} ms`);
-                    break;
+                    return dispatch({
+                        type: ACTIONS.WSS_RTT,
+                        payload: Date.now() - message.time,
+                    });
                 case "organizeState":
-                    dispatch({
+                    return dispatch({
                         type: ACTIONS.ORGANIZE_STATE,
                         payload: {
                             state: message.state,
@@ -69,6 +73,7 @@ export const organizeAll = () => async (dispatch) => {
 const initialState = {
     series: null,
     links: null,
+    wssRTT: 0,
 
     organizeState: null,
 };
@@ -94,6 +99,12 @@ const apiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 organizeState: payload,
+            };
+        case ACTIONS.WSS_RTT:
+            console.log("WSS_RTT", payload);
+            return {
+                ...state,
+                wssRTT: payload,
             };
 
         default:
