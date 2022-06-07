@@ -17,9 +17,7 @@ class Series extends Component {
                         organizeAll
                     </Button>
 
-                    <pre>{JSON.stringify(this.props.organizeStatus, null, 2)}</pre>
-
-                    <pre>{JSON.stringify(this.props.organizeData, null, 2)}</pre>
+                    <pre>{JSON.stringify(this.props.organizeState, null, 2)}</pre>
                 </Box>
             </Layout>
         );
@@ -27,8 +25,7 @@ class Series extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    organizeStatus: state.apiReducer.organizeStatus,
-    organizeData: state.apiReducer.organizeData,
+    organizeState: state.apiReducer.organizeState,
 });
 
 const mapDispatchToProps = {

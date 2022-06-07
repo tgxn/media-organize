@@ -5,8 +5,7 @@ export const ACTIONS = {
     FETCH_SERIES: "FETCH_SERIES",
     FETCH_LINKS: "FETCH_LINKS",
 
-    ORGANIZE_STATUS: "ORGANIZE_STATUS",
-    ORGANIZE_DATA: "ORGANIZE_DATA",
+    ORGANIZE_STATE: "ORGANIZE_STATE",
 };
 
 export const fetchSeries = () => async (dispatch) => {
@@ -38,11 +37,13 @@ export const fetchLinks = () => async (dispatch) => {
 export const organizeAll = () => async (dispatch) => {
     try {
         dispatch({
-            type: ACTIONS.ORGANIZE_STATUS,
-            payload: "started",
+            type: ACTIONS.ORGANIZE_STATE,
+            payload: { state: "started" },
         });
 
         const socket = getSocket();
+
+        socket.send(JSON.stringify({ type: "startOrganize" }));
 
         socket.onmessage = function message(event) {
             var message = JSON.parse(event.data);
@@ -51,11 +52,11 @@ export const organizeAll = () => async (dispatch) => {
                 case "pong":
                     console.info(`Round-trip time: ${Date.now() - message.time} ms`);
                     break;
-                case "organizeStatus":
+                case "organizeState":
                     dispatch({
-                        type: ACTIONS.ORGANIZE_STATUS,
+                        type: ACTIONS.ORGANIZE_STATE,
                         payload: {
-                            status: message.status,
+                            state: message.state,
                         },
                     });
             }
@@ -69,8 +70,7 @@ const initialState = {
     series: null,
     links: null,
 
-    organizeStatus: false,
-    organizeData: null,
+    organizeState: null,
 };
 
 const apiReducer = (state = initialState, action) => {
@@ -89,17 +89,11 @@ const apiReducer = (state = initialState, action) => {
                 ...state,
                 links: payload,
             };
-        case ACTIONS.ORGANIZE_STATUS:
-            console.log("ORGANIZE_STATUS", payload);
+        case ACTIONS.ORGANIZE_STATE:
+            console.log("ORGANIZE_STATE", payload);
             return {
                 ...state,
-                organizeStatus: payload,
-            };
-        case ACTIONS.ORGANIZE_DATA:
-            console.log("ORGANIZE_DATA", payload);
-            state.organizeData = state.organizeData.push(payload);
-            return {
-                ...state,
+                organizeState: payload,
             };
 
         default:

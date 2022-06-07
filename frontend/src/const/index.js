@@ -1,4 +1,6 @@
-import { Dvr, Link } from "@mui/icons-material";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import Link from "@mui/icons-material/Link";
+import Dvr from "@mui/icons-material/Dvr";
 
 import store from "./store";
 import theme from "./theme";
@@ -22,7 +24,7 @@ const NAV_ITEMS = [
     },
     {
         name: "Actions",
-        icon: <Link />,
+        icon: <AssignmentIcon />,
         route: ROUTES.actions,
     },
 ];

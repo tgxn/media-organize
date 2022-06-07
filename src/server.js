@@ -31,18 +31,6 @@ class Server {
         this.app.use(compression());
     }
 
-    async startWorker(workerTask, workerData, onMessage) {
-        return new Promise((resolve, reject) => {
-            const worker = new Worker(`./src/tasks/${workerTask}.js`, { workerData });
-            worker.on("message", onMessage);
-            worker.on("error", reject);
-            worker.on("exit", (code) => {
-                if (code === 0) resolve(code);
-                if (code !== 0) reject(new Error(`stopped with  ${code} exit code`));
-            });
-        });
-    }
-
     getSeriesList() {
         const series = {};
 
@@ -85,6 +73,19 @@ class Server {
         this.server = this.app.listen(3500);
 
         this.createSocketServer();
+        console.log("Server started on 3500");
+    }
+
+    async startWorker(workerTask, workerData, onMessage) {
+        return new Promise((resolve, reject) => {
+            const worker = new Worker(`./src/tasks/${workerTask}.js`, { workerData });
+            worker.on("message", onMessage);
+            worker.on("error", reject);
+            worker.on("exit", (code) => {
+                if (code === 0) resolve(code);
+                if (code !== 0) reject(new Error(`stopped with  ${code} exit code`));
+            });
+        });
     }
 
     createSocketServer() {
@@ -93,10 +94,10 @@ class Server {
             path: "/socket",
         });
 
-        wss.on("connection", function connection(ws) {
+        wss.on("connection", async (ws) => {
             console.log("Client connected");
 
-            ws.on("message", function incoming(message) {
+            ws.on("message", async (message) => {
                 console.log(`received: ${message}`);
                 const parsed = JSON.parse(message);
 
@@ -104,54 +105,25 @@ class Server {
                     ws.send(JSON.stringify({ type: "pong", time: parsed.time }));
                 }
 
-                // ws.send(message);
+                if (parsed.type === "startOrganize") {
+                    await this.startWorker("organizeAll", { name: "test" }, (message) => {
+                        ws.send(JSON.stringify({ type: "organizeState", state: message }));
+                    });
+                }
             });
         });
-        // const io = socket(this.server, {
-        //     // path: "/ws",
-        // });
-        // io.path("/socket/");
-        // this.app.set("socketio", io);
-
-        // const websocketServer = new WebSocket.Server({
-        //     noServer: true,
-        //     path: "/ws",
-        // });
-
-        // expressServer.on("upgrade", (request, socket, head) => {
-        //     websocketServer.handleUpgrade(request, socket, head, (websocket) => {
-        //         websocketServer.emit("connection", websocket, request);
-        //     });
-        // });
-
-        // websocketServer.on("connection", function connection(websocketConnection, connectionRequest) {
-        //     const [_path, params] = connectionRequest?.url?.split("?");
-        //     const connectionParams = queryString.parse(params);
-
-        //     // NOTE: connectParams are not used here but good to understand how to get
-        //     // to them if you need to pass data with the connection to identify it (e.g., a userId).
-        //     console.log(connectionParams);
-
-        //     websocketConnection.on("message", (message) => {
-        //         const parsedMessage = JSON.parse(message);
-        //         console.log(parsedMessage);
-        //         websocketConnection.send(JSON.stringify({ message: "There be gold in them thar hills." }));
-        //     });
-        // });
-
-        // return websocketServer;
     }
 
     actionRoutes() {
         const router = express.Router();
 
-        router.get("/organize", async (req, res, next) => {
-            const resuolt = await this.startWorker("organizeAll", { name: "test" }, (message) => {
-                res.write(JSON.stringify(message) + "\n");
-            });
-            res.write(JSON.stringify(resuolt));
-            return res.end();
-        });
+        // router.get("/organize", async (req, res, next) => {
+        //     const resuolt = await this.startWorker("organizeAll", { name: "test" }, (message) => {
+        //         res.write(JSON.stringify(message) + "\n");
+        //     });
+        //     res.write(JSON.stringify(resuolt));
+        //     return res.end();
+        // });
 
         return router;
     }
